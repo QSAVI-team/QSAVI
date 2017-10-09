@@ -1,0 +1,38 @@
+HardwareSerial2.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/HardwareSerial2.cpp \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Arduino.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/binary.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/WCharacter.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/WString.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/HardwareSerial.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Stream.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Print.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Printable.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/USBAPI.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/variants/standard/pins_arduino.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/HardwareSerial_private.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/wiring_private.h
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Arduino.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/binary.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/WCharacter.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/WString.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/HardwareSerial.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Stream.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Print.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Printable.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/USBAPI.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/variants/standard/pins_arduino.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/HardwareSerial_private.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/wiring_private.h:

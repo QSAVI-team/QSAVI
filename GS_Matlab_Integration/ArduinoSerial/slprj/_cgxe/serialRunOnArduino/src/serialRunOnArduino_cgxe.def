@@ -1,0 +1,3 @@
+LIBRARY serialRunOnArduino_cgxe.mexw64
+EXPORTS
+mexFunction

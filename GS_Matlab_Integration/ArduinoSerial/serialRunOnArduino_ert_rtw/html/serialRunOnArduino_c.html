@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="./js/coder_app.js"></script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="./rtwreport_utils.js"></script>
+<script type="text/javascript" src="./rtwannotate.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/coder_app.css"/>
+</head>
+<body onload="srcFileOnload();">
+<pre id="code">
+<table class="code" id="codeTbl">
+<tr name="1" id="1">
+<td><a id="l1" class='ln'>1</a></td><td><span class="ct">/*</span></td></tr>
+<tr name="2" id="2">
+<td><a id="l2" class='ln'>2</a></td><td><span class="ct"> * Academic License - for use in teaching, academic research, and meeting</span></td></tr>
+<tr name="3" id="3">
+<td><a id="l3" class='ln'>3</a></td><td><span class="ct"> * course requirements at degree granting institutions only.  Not for</span></td></tr>
+<tr name="4" id="4">
+<td><a id="l4" class='ln'>4</a></td><td><span class="ct"> * government, commercial, or other organizational use.</span></td></tr>
+<tr name="5" id="5">
+<td><a id="l5" class='ln'>5</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="6" id="6">
+<td><a id="l6" class='ln'>6</a></td><td><span class="ct"> * File: serialRunOnArduino.c</span></td></tr>
+<tr name="7" id="7">
+<td><a id="l7" class='ln'>7</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="8" id="8">
+<td><a id="l8" class='ln'>8</a></td><td><span class="ct"> * Code generated for Simulink model 'serialRunOnArduino'.</span></td></tr>
+<tr name="9" id="9">
+<td><a id="l9" class='ln'>9</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="10" id="10">
+<td><a id="l10" class='ln'>10</a></td><td><span class="ct"> * Model version                  : 1.46</span></td></tr>
+<tr name="11" id="11">
+<td><a id="l11" class='ln'>11</a></td><td><span class="ct"> * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017</span></td></tr>
+<tr name="12" id="12">
+<td><a id="l12" class='ln'>12</a></td><td><span class="ct"> * C/C++ source code generated on : Mon Oct 02 19:21:48 2017</span></td></tr>
+<tr name="13" id="13">
+<td><a id="l13" class='ln'>13</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="14" id="14">
+<td><a id="l14" class='ln'>14</a></td><td><span class="ct"> * Target selection: ert.tlc</span></td></tr>
+<tr name="15" id="15">
+<td><a id="l15" class='ln'>15</a></td><td><span class="ct"> * Embedded hardware selection: Atmel-&gt;AVR</span></td></tr>
+<tr name="16" id="16">
+<td><a id="l16" class='ln'>16</a></td><td><span class="ct"> * Code generation objectives: Unspecified</span></td></tr>
+<tr name="17" id="17">
+<td><a id="l17" class='ln'>17</a></td><td><span class="ct"> * Validation result: Not run</span></td></tr>
+<tr name="18" id="18">
+<td><a id="l18" class='ln'>18</a></td><td><span class="ct"> */</span></td></tr>
+<tr name="19" id="19">
+<td><a id="l19" class='ln'>19</a></td><td></td></tr>
+<tr name="20" id="20">
+<td><a id="l20" class='ln'>20</a></td><td><span class="pp">#include "serialRunOnArduino.h"</span></td></tr>
+<tr name="21" id="21">
+<td><a id="l21" class='ln'>21</a></td><td><span class="pp">#include "serialRunOnArduino_private.h"</span></td></tr>
+<tr name="22" id="22">
+<td><a id="l22" class='ln'>22</a></td><td><span class="pp">#define</span> <a id="22c9" class="tk">serialRunOnArdui_floatprecision</a> (2.0)</td></tr>
+<tr name="23" id="23">
+<td><a id="l23" class='ln'>23</a></td><td></td></tr>
+<tr name="24" id="24">
+<td><a id="l24" class='ln'>24</a></td><td><span class="ct">/* Block states (auto storage) */</span></td></tr>
+<tr name="25" id="25">
+<td><a id="l25" class='ln'>25</a></td><td><a id="25c1" class="tk">DW_serialRunOnArduino_T</a> <a id="25c25" class="tk">serialRunOnArduino_DW</a>;</td></tr>
+<tr name="26" id="26">
+<td><a id="l26" class='ln'>26</a></td><td></td></tr>
+<tr name="27" id="27">
+<td><a id="l27" class='ln'>27</a></td><td><span class="ct">/* Real-time model */</span></td></tr>
+<tr name="28" id="28">
+<td><a id="l28" class='ln'>28</a></td><td><a id="28c1" class="tk">RT_MODEL_serialRunOnArduino_T</a> <a id="28c31" class="tk">serialRunOnArduino_M_</a>;</td></tr>
+<tr name="29" id="29">
+<td><a id="l29" class='ln'>29</a></td><td><a id="29c1" class="tk">RT_MODEL_serialRunOnArduino_T</a> <a id="29c31" class="tk">*</a><span class="kw">const</span> <a id="29c38" class="tk">serialRunOnArduino_M</a> =</td></tr>
+<tr name="30" id="30">
+<td><a id="l30" class='ln'>30</a></td><td>  <a id="30c3" class="tk">&amp;</a><a id="30c4" class="tk">serialRunOnArduino_M_</a>;</td></tr>
+<tr name="31" id="31">
+<td><a id="l31" class='ln'>31</a></td><td></td></tr>
+<tr name="32" id="32">
+<td><a id="l32" class='ln'>32</a></td><td><span class="ct">/* Model step function */</span></td></tr>
+<tr name="33" id="33">
+<td><a id="l33" class='ln'>33</a></td><td><span class="kw">void</span> <a id="33c6" class="tk">serialRunOnArduino_step</a>(<span class="kw">void</span>)</td></tr>
+<tr name="34" id="34">
+<td><a id="l34" class='ln'>34</a></td><td><span class="br">{</span></td></tr>
+<tr name="35" id="35">
+<td><a id="l35" class='ln'>35</a></td><td>  <a id="35c3" class="tk">uint16_T</a> <a id="35c12" class="tk">rtb_AnalogInput_0</a>;</td></tr>
+<tr name="36" id="36">
+<td><a id="l36" class='ln'>36</a></td><td>  <a id="36c3" class="tk">int16_T</a> <a id="36c11" class="tk">k</a>;</td></tr>
+<tr name="37" id="37">
+<td><a id="l37" class='ln'>37</a></td><td>  <a id="37c3" class="tk">uint8_T</a> <a id="37c11" class="tk">dataIn</a>;</td></tr>
+<tr name="38" id="38">
+<td><a id="l38" class='ln'>38</a></td><td>  <a id="38c3" class="tk">boolean_T</a> <a id="38c13" class="tk">exitg1</a>;</td></tr>
+<tr name="39" id="39">
+<td><a id="l39" class='ln'>39</a></td><td></td></tr>
+<tr name="40" id="40">
+<td><a id="l40" class='ln'>40</a></td><td>  <span class="ct">/* S-Function (arduinoanaloginput_sfcn): '<a class="ct blk" blk_line="40">&lt;Root&gt;/Analog Input</a>' */</span></td></tr>
+<tr name="41" id="41">
+<td><a id="l41" class='ln'>41</a></td><td>  <a id="41c3" class="tk">rtb_AnalogInput_0</a> = <a id="41c23" class="tk">MW_analogRead</a>(<a id="41c37" class="tk">serialRunOnArduino_P</a>.<a id="41c58" class="tk">AnalogInput_p1</a>);</td></tr>
+<tr name="42" id="42">
+<td><a id="l42" class='ln'>42</a></td><td></td></tr>
+<tr name="43" id="43">
+<td><a id="l43" class='ln'>43</a></td><td>  <span class="ct">/* Start for MATLABSystem: '<a class="ct blk" blk_line="43">&lt;Root&gt;/Serial Transmit</a>' incorporates:</span></td></tr>
+<tr name="44" id="44">
+<td><a id="l44" class='ln'>44</a></td><td><span class="ct">   *  Gain: '<a class="ct blk" blk_line="44">&lt;Root&gt;/Gain</a>'</span></td></tr>
+<tr name="45" id="45">
+<td><a id="l45" class='ln'>45</a></td><td><span class="ct">   *  MATLABSystem: '<a class="ct blk" blk_line="45">&lt;Root&gt;/Serial Transmit</a>'</span></td></tr>
+<tr name="46" id="46">
+<td><a id="l46" class='ln'>46</a></td><td><span class="ct">   *  S-Function (arduinoanaloginput_sfcn): '<a class="ct blk" blk_line="46">&lt;Root&gt;/Analog Input</a>'</span></td></tr>
+<tr name="47" id="47">
+<td><a id="l47" class='ln'>47</a></td><td><span class="ct">   */</span></td></tr>
+<tr name="48" id="48">
+<td><a id="l48" class='ln'>48</a></td><td>  <a id="48c3" class="tk">k</a> = 0;</td></tr>
+<tr name="49" id="49">
+<td><a id="l49" class='ln'>49</a></td><td>  <a id="49c3" class="tk">exitg1</a> = false;</td></tr>
+<tr name="50" id="50">
+<td><a id="l50" class='ln'>50</a></td><td>  <span class="kw">while</span> ((<a id="50c11" class="tk">!</a><a id="50c12" class="tk">exitg1</a>) <a id="50c20" class="tk">&amp;&amp;</a> (<a id="50c24" class="tk">k</a> <a id="50c26" class="tk">&lt;</a> 8)) <span class="br">{</span></td></tr>
+<tr name="51" id="51">
+<td><a id="l51" class='ln'>51</a></td><td>    <span class="kw">if</span> (<a id="51c9" class="tk">serialRunOnArduino_DW</a>.<a id="51c31" class="tk">obj</a>.<a id="51c35" class="tk">inputVarSize</a>.<a id="51c48" class="tk">f1</a>[<a id="51c51" class="tk">k</a>] <a id="51c54" class="tk">!=</a> 1UL) <span class="br">{</span></td></tr>
+<tr name="52" id="52">
+<td><a id="l52" class='ln'>52</a></td><td>      <span class="kw">for</span> (<a id="52c12" class="tk">k</a> = 0; <a id="52c19" class="tk">k</a> <a id="52c21" class="tk">&lt;</a> 8; <a id="52c26" class="tk">k</a><a id="52c27" class="tk">++</a>) <span class="br">{</span></td></tr>
+<tr name="53" id="53">
+<td><a id="l53" class='ln'>53</a></td><td>        <a id="53c9" class="tk">serialRunOnArduino_DW</a>.<a id="53c31" class="tk">obj</a>.<a id="53c35" class="tk">inputVarSize</a>.<a id="53c48" class="tk">f1</a>[<a id="53c51" class="tk">k</a>] = 1UL;</td></tr>
+<tr name="54" id="54">
+<td><a id="l54" class='ln'>54</a></td><td>      <span class="br">}</span></td></tr>
+<tr name="55" id="55">
+<td><a id="l55" class='ln'>55</a></td><td></td></tr>
+<tr name="56" id="56">
+<td><a id="l56" class='ln'>56</a></td><td>      <a id="56c7" class="tk">exitg1</a> = true;</td></tr>
+<tr name="57" id="57">
+<td><a id="l57" class='ln'>57</a></td><td>    <span class="br">}</span> <span class="kw">else</span> <span class="br">{</span></td></tr>
+<tr name="58" id="58">
+<td><a id="l58" class='ln'>58</a></td><td>      <a id="58c7" class="tk">k</a><a id="58c8" class="tk">++</a>;</td></tr>
+<tr name="59" id="59">
+<td><a id="l59" class='ln'>59</a></td><td>    <span class="br">}</span></td></tr>
+<tr name="60" id="60">
+<td><a id="l60" class='ln'>60</a></td><td>  <span class="br">}</span></td></tr>
+<tr name="61" id="61">
+<td><a id="l61" class='ln'>61</a></td><td></td></tr>
+<tr name="62" id="62">
+<td><a id="l62" class='ln'>62</a></td><td>  <a id="62c3" class="tk">dataIn</a> = (<a id="62c13" class="tk">uint8_T</a>)((<a id="62c23" class="tk">uint32_T</a>)<a id="62c32" class="tk">serialRunOnArduino_P</a>.<a id="62c53" class="tk">Gain_Gain</a> <a id="62c63" class="tk">*</a></td></tr>
+<tr name="63" id="63">
+<td><a id="l63" class='ln'>63</a></td><td>                     <a id="63c22" class="tk">rtb_AnalogInput_0</a> <a id="63c40" class="tk">&gt;&gt;</a> 17);</td></tr>
+<tr name="64" id="64">
+<td><a id="l64" class='ln'>64</a></td><td>  <a id="64c3" class="tk">MW_Serial_write</a>(<a id="64c19" class="tk">serialRunOnArduino_DW</a>.<a id="64c41" class="tk">obj</a>.<a id="64c45" class="tk">port</a>, <a id="64c51" class="tk">&amp;</a><a id="64c52" class="tk">dataIn</a>, 1.0,</td></tr>
+<tr name="65" id="65">
+<td><a id="l65" class='ln'>65</a></td><td>                  <a id="65c19" class="tk">serialRunOnArduino_DW</a>.<a id="65c41" class="tk">obj</a>.<a id="65c45" class="tk">dataSizeInBytes</a>,</td></tr>
+<tr name="66" id="66">
+<td><a id="l66" class='ln'>66</a></td><td>                  <a id="66c19" class="tk">serialRunOnArduino_DW</a>.<a id="66c41" class="tk">obj</a>.<a id="66c45" class="tk">sendModeEnum</a>,</td></tr>
+<tr name="67" id="67">
+<td><a id="l67" class='ln'>67</a></td><td>                  <a id="67c19" class="tk">serialRunOnArduino_DW</a>.<a id="67c41" class="tk">obj</a>.<a id="67c45" class="tk">dataType</a>,</td></tr>
+<tr name="68" id="68">
+<td><a id="l68" class='ln'>68</a></td><td>                  <a id="68c19" class="tk">serialRunOnArduino_DW</a>.<a id="68c41" class="tk">obj</a>.<a id="68c45" class="tk">sendFormatEnum</a>,</td></tr>
+<tr name="69" id="69">
+<td><a id="l69" class='ln'>69</a></td><td>                  <a id="69c19" class="tk">serialRunOnArdui_floatprecision</a>, '\x00');</td></tr>
+<tr name="70" id="70">
+<td><a id="l70" class='ln'>70</a></td><td><span class="br">}</span></td></tr>
+<tr name="71" id="71">
+<td><a id="l71" class='ln'>71</a></td><td></td></tr>
+<tr name="72" id="72">
+<td><a id="l72" class='ln'>72</a></td><td><span class="ct">/* Model initialize function */</span></td></tr>
+<tr name="73" id="73">
+<td><a id="l73" class='ln'>73</a></td><td><span class="kw">void</span> <a id="73c6" class="tk">serialRunOnArduino_initialize</a>(<span class="kw">void</span>)</td></tr>
+<tr name="74" id="74">
+<td><a id="l74" class='ln'>74</a></td><td><span class="br">{</span></td></tr>
+<tr name="75" id="75">
+<td><a id="l75" class='ln'>75</a></td><td>  <span class="ct">/* Registration code */</span></td></tr>
+<tr name="76" id="76">
+<td><a id="l76" class='ln'>76</a></td><td></td></tr>
+<tr name="77" id="77">
+<td><a id="l77" class='ln'>77</a></td><td>  <span class="ct">/* initialize error status */</span></td></tr>
+<tr name="78" id="78">
+<td><a id="l78" class='ln'>78</a></td><td>  <a id="78c3" class="tk">rtmSetErrorStatus</a>(<a id="78c21" class="tk">serialRunOnArduino_M</a>, (<a id="78c44" class="tk">NULL</a>));</td></tr>
+<tr name="79" id="79">
+<td><a id="l79" class='ln'>79</a></td><td></td></tr>
+<tr name="80" id="80">
+<td><a id="l80" class='ln'>80</a></td><td>  <span class="ct">/* states (dwork) */</span></td></tr>
+<tr name="81" id="81">
+<td><a id="l81" class='ln'>81</a></td><td>  (<span class="kw">void</span>) <a id="81c10" class="tk">memset</a>((<span class="kw">void</span> <a id="81c23" class="tk">*</a>)<a id="81c25" class="tk">&amp;</a><a id="81c26" class="tk">serialRunOnArduino_DW</a>, 0,</td></tr>
+<tr name="82" id="82">
+<td><a id="l82" class='ln'>82</a></td><td>                <span class="kw">sizeof</span>(<a id="82c24" class="tk">DW_serialRunOnArduino_T</a>));</td></tr>
+<tr name="83" id="83">
+<td><a id="l83" class='ln'>83</a></td><td></td></tr>
+<tr name="84" id="84">
+<td><a id="l84" class='ln'>84</a></td><td>  <span class="br">{</span></td></tr>
+<tr name="85" id="85">
+<td><a id="l85" class='ln'>85</a></td><td>    <a id="85c5" class="tk">cell_wrap_serialRunOnArduino_T</a> <a id="85c36" class="tk">varSizes</a>;</td></tr>
+<tr name="86" id="86">
+<td><a id="l86" class='ln'>86</a></td><td>    <a id="86c5" class="tk">int16_T</a> <a id="86c13" class="tk">i</a>;</td></tr>
+<tr name="87" id="87">
+<td><a id="l87" class='ln'>87</a></td><td></td></tr>
+<tr name="88" id="88">
+<td><a id="l88" class='ln'>88</a></td><td>    <span class="ct">/* Start for S-Function (arduinoanaloginput_sfcn): '<a class="ct blk" blk_line="88">&lt;Root&gt;/Analog Input</a>' */</span></td></tr>
+<tr name="89" id="89">
+<td><a id="l89" class='ln'>89</a></td><td>    <a id="89c5" class="tk">MW_pinModeAnalogInput</a>(<a id="89c27" class="tk">serialRunOnArduino_P</a>.<a id="89c48" class="tk">AnalogInput_p1</a>);</td></tr>
+<tr name="90" id="90">
+<td><a id="l90" class='ln'>90</a></td><td></td></tr>
+<tr name="91" id="91">
+<td><a id="l91" class='ln'>91</a></td><td>    <span class="ct">/* Start for MATLABSystem: '<a class="ct blk" blk_line="91">&lt;Root&gt;/Serial Transmit</a>' */</span></td></tr>
+<tr name="92" id="92">
+<td><a id="l92" class='ln'>92</a></td><td>    <a id="92c5" class="tk">serialRunOnArduino_DW</a>.<a id="92c27" class="tk">obj</a>.<a id="92c31" class="tk">isInitialized</a> = 0L;</td></tr>
+<tr name="93" id="93">
+<td><a id="l93" class='ln'>93</a></td><td>    <a id="93c5" class="tk">serialRunOnArduino_DW</a>.<a id="93c27" class="tk">obj</a>.<a id="93c31" class="tk">isInitialized</a> = 1L;</td></tr>
+<tr name="94" id="94">
+<td><a id="l94" class='ln'>94</a></td><td>    <a id="94c5" class="tk">varSizes</a>.<a id="94c14" class="tk">f1</a>[0] = 1UL;</td></tr>
+<tr name="95" id="95">
+<td><a id="l95" class='ln'>95</a></td><td>    <a id="95c5" class="tk">varSizes</a>.<a id="95c14" class="tk">f1</a>[1] = 1UL;</td></tr>
+<tr name="96" id="96">
+<td><a id="l96" class='ln'>96</a></td><td>    <span class="kw">for</span> (<a id="96c10" class="tk">i</a> = 0; <a id="96c17" class="tk">i</a> <a id="96c19" class="tk">&lt;</a> 6; <a id="96c24" class="tk">i</a><a id="96c25" class="tk">++</a>) <span class="br">{</span></td></tr>
+<tr name="97" id="97">
+<td><a id="l97" class='ln'>97</a></td><td>      <a id="97c7" class="tk">varSizes</a>.<a id="97c16" class="tk">f1</a>[<a id="97c19" class="tk">i</a> <a id="97c21" class="tk">+</a> 2] = 1UL;</td></tr>
+<tr name="98" id="98">
+<td><a id="l98" class='ln'>98</a></td><td>    <span class="br">}</span></td></tr>
+<tr name="99" id="99">
+<td><a id="l99" class='ln'>99</a></td><td></td></tr>
+<tr name="100" id="100">
+<td><a id="l100" class='ln'>100</a></td><td>    <a id="100c5" class="tk">serialRunOnArduino_DW</a>.<a id="100c27" class="tk">obj</a>.<a id="100c31" class="tk">inputVarSize</a> = <a id="100c46" class="tk">varSizes</a>;</td></tr>
+<tr name="101" id="101">
+<td><a id="l101" class='ln'>101</a></td><td>    <a id="101c5" class="tk">serialRunOnArduino_DW</a>.<a id="101c27" class="tk">obj</a>.<a id="101c31" class="tk">port</a> = 0.0;</td></tr>
+<tr name="102" id="102">
+<td><a id="l102" class='ln'>102</a></td><td>    <a id="102c5" class="tk">serialRunOnArduino_DW</a>.<a id="102c27" class="tk">obj</a>.<a id="102c31" class="tk">dataSizeInBytes</a> = 1.0;</td></tr>
+<tr name="103" id="103">
+<td><a id="l103" class='ln'>103</a></td><td>    <a id="103c5" class="tk">serialRunOnArduino_DW</a>.<a id="103c27" class="tk">obj</a>.<a id="103c31" class="tk">dataType</a> = 0.0;</td></tr>
+<tr name="104" id="104">
+<td><a id="l104" class='ln'>104</a></td><td>    <a id="104c5" class="tk">serialRunOnArduino_DW</a>.<a id="104c27" class="tk">obj</a>.<a id="104c31" class="tk">sendModeEnum</a> = 0.0;</td></tr>
+<tr name="105" id="105">
+<td><a id="l105" class='ln'>105</a></td><td>    <a id="105c5" class="tk">serialRunOnArduino_DW</a>.<a id="105c27" class="tk">obj</a>.<a id="105c31" class="tk">sendFormatEnum</a> = 0.0;</td></tr>
+<tr name="106" id="106">
+<td><a id="l106" class='ln'>106</a></td><td></td></tr>
+<tr name="107" id="107">
+<td><a id="l107" class='ln'>107</a></td><td>    <span class="ct">/* End of Start for MATLABSystem: '<a class="ct blk" blk_line="107">&lt;Root&gt;/Serial Transmit</a>' */</span></td></tr>
+<tr name="108" id="108">
+<td><a id="l108" class='ln'>108</a></td><td>  <span class="br">}</span></td></tr>
+<tr name="109" id="109">
+<td><a id="l109" class='ln'>109</a></td><td><span class="br">}</span></td></tr>
+<tr name="110" id="110">
+<td><a id="l110" class='ln'>110</a></td><td></td></tr>
+<tr name="111" id="111">
+<td><a id="l111" class='ln'>111</a></td><td><span class="ct">/* Model terminate function */</span></td></tr>
+<tr name="112" id="112">
+<td><a id="l112" class='ln'>112</a></td><td><span class="kw">void</span> <a id="112c6" class="tk">serialRunOnArduino_terminate</a>(<span class="kw">void</span>)</td></tr>
+<tr name="113" id="113">
+<td><a id="l113" class='ln'>113</a></td><td><span class="br">{</span></td></tr>
+<tr name="114" id="114">
+<td><a id="l114" class='ln'>114</a></td><td>  <span class="ct">/* Start for MATLABSystem: '<a class="ct blk" blk_line="114">&lt;Root&gt;/Serial Transmit</a>' incorporates:</span></td></tr>
+<tr name="115" id="115">
+<td><a id="l115" class='ln'>115</a></td><td><span class="ct">   *  Terminate for MATLABSystem: '<a class="ct blk" blk_line="115">&lt;Root&gt;/Serial Transmit</a>'</span></td></tr>
+<tr name="116" id="116">
+<td><a id="l116" class='ln'>116</a></td><td><span class="ct">   */</span></td></tr>
+<tr name="117" id="117">
+<td><a id="l117" class='ln'>117</a></td><td>  <span class="kw">if</span> (<a id="117c7" class="tk">serialRunOnArduino_DW</a>.<a id="117c29" class="tk">obj</a>.<a id="117c33" class="tk">isInitialized</a> <a id="117c47" class="tk">==</a> 1L) <span class="br">{</span></td></tr>
+<tr name="118" id="118">
+<td><a id="l118" class='ln'>118</a></td><td>    <a id="118c5" class="tk">serialRunOnArduino_DW</a>.<a id="118c27" class="tk">obj</a>.<a id="118c31" class="tk">isInitialized</a> = 2L;</td></tr>
+<tr name="119" id="119">
+<td><a id="l119" class='ln'>119</a></td><td>  <span class="br">}</span></td></tr>
+<tr name="120" id="120">
+<td><a id="l120" class='ln'>120</a></td><td></td></tr>
+<tr name="121" id="121">
+<td><a id="l121" class='ln'>121</a></td><td>  <span class="ct">/* End of Start for MATLABSystem: '<a class="ct blk" blk_line="121">&lt;Root&gt;/Serial Transmit</a>' */</span></td></tr>
+<tr name="122" id="122">
+<td><a id="l122" class='ln'>122</a></td><td><span class="br">}</span></td></tr>
+<tr name="123" id="123">
+<td><a id="l123" class='ln'>123</a></td><td></td></tr>
+<tr name="124" id="124">
+<td><a id="l124" class='ln'>124</a></td><td><span class="ct">/*</span></td></tr>
+<tr name="125" id="125">
+<td><a id="l125" class='ln'>125</a></td><td><span class="ct"> * File trailer for generated code.</span></td></tr>
+<tr name="126" id="126">
+<td><a id="l126" class='ln'>126</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="127" id="127">
+<td><a id="l127" class='ln'>127</a></td><td><span class="ct"> * [EOF]</span></td></tr>
+<tr name="128" id="128">
+<td><a id="l128" class='ln'>128</a></td><td><span class="ct"> */</span></td></tr>
+<tr name="129" id="129">
+<td><a id="l129" class='ln'>129</a></td><td></td></tr>
+</table>
+</pre>
+</body>
+</html>

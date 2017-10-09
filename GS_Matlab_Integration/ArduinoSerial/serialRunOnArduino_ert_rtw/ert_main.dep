@@ -1,0 +1,46 @@
+ert_main.o: ert_main.c serialRunOnArduino.h rtwtypes.h \
+ C:/PROGRA~1/MATLAB/R2017a/simulink/include/rtw_continuous.h \
+ C:/Users/Oran/Desktop/Baguette/DANTE'~1/IMAGIN~1/Hand/GYRO_S~1/ARDUIN~1/serialRunOnArduino_ert_rtw/rtwtypes.h \
+ C:/PROGRA~1/MATLAB/R2017a/simulink/include/rtw_solver.h \
+ C:/PROGRA~1/MATLAB/R2017a/simulink/include/rtw_continuous.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/include/MW_SerialWrite.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/blocks/sfcn/include/arduino_analoginput_lct.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/include/io_wrappers.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/blocks/sfcn/include/arduino_blocks_abstraction.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Arduino.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/binary.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/variants/standard/pins_arduino.h \
+ serialRunOnArduino_types.h MW_target_hardware_resources.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinotarget/scheduler/include/arduinoAVRScheduler.h
+
+serialRunOnArduino.h:
+
+rtwtypes.h:
+
+C:/PROGRA~1/MATLAB/R2017a/simulink/include/rtw_continuous.h:
+
+C:/Users/Oran/Desktop/Baguette/DANTE'~1/IMAGIN~1/Hand/GYRO_S~1/ARDUIN~1/serialRunOnArduino_ert_rtw/rtwtypes.h:
+
+C:/PROGRA~1/MATLAB/R2017a/simulink/include/rtw_solver.h:
+
+C:/PROGRA~1/MATLAB/R2017a/simulink/include/rtw_continuous.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/include/MW_SerialWrite.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/blocks/sfcn/include/arduino_analoginput_lct.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/include/io_wrappers.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinobase/blocks/sfcn/include/arduino_blocks_abstraction.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/Arduino.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/cores/arduino/binary.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/3P.instrset/arduinoide.instrset/arduino-1.6.13/hardware/arduino/avr/variants/standard/pins_arduino.h:
+
+serialRunOnArduino_types.h:
+
+MW_target_hardware_resources.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2017a/toolbox/target/supportpackages/arduinotarget/scheduler/include/arduinoAVRScheduler.h:

@@ -1,0 +1,12 @@
+
+avrdude: AVR device initialized and ready to accept instructions
+avrdude: Device signature = 0x1e950f (probably m328p)
+avrdude: NOTE: "flash" memory has been specified, an erase cycle will be performed
+         To disable this feature, specify the -D option.
+avrdude: erasing chip
+avrdude: reading input file "../serialRunOnArduino.hex"
+avrdude: writing flash (6214 bytes):
+avrdude: 6214 bytes of flash written
+
+avrdude done.  Thank you.
+
