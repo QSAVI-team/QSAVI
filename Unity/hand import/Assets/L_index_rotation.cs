@@ -17,7 +17,7 @@ public class L_index_rotation : MonoBehaviour {
 	void Update () {
         if (myRotation == null)
         {
-            myRotation = gameObject.GetComponent<Rotation>();
+            myRotation = gameObject.GetComponent<r>();
             if (myRotation == null)
             {
                 myRotation = gameObject.AddComponent<Rotation>();
