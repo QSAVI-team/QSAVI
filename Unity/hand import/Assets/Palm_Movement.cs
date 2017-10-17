@@ -8,7 +8,7 @@ public class Palm_Movement : MonoBehaviour {
 
     private float amountToMove;
 
-    SerialPort sp = new SerialPort("COM3",115200)
+    SerialPort sp = new SerialPort("COM3", 115200);
 	// Use this for initialization
 	void Start ()
     {
@@ -35,7 +35,7 @@ public class Palm_Movement : MonoBehaviour {
 	}
 
     void MoveObject ( int x, int y, int z)
-        transform.Translate(Vector3.left * amountToMove, Space.World)
-        transform.Translate(Vector3.)
+        transform.Translate(Vector3.left * amountToMove, Space.World);
+        transform.Translate(Vector3.);
 
 }
