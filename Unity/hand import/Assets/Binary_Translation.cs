@@ -9,7 +9,7 @@ public class Binary_Translation : MonoBehaviour {
 
     private float amountToMove;
 
-    SerialPort sp=new SerialPort("COM3",115200)
+    SerialPort sp = new SerialPort("COM3", 115200);
 	// Use this for initialization
 	void Start () {
         sp.Open();
@@ -26,7 +26,7 @@ public class Binary_Translation : MonoBehaviour {
             {
                 MoveObject(sp.ReadByte()); // cant read byte by byte??? have to read vector
 
-                print(sp.ReadByte);
+                print(sp.ReadByte());
             }
             catch (System.Exception)
 
@@ -35,9 +35,10 @@ public class Binary_Translation : MonoBehaviour {
             }
         }
 
+        Debug.Log(sp.ReadByte());
 
-        if (true)
-	}
+
+    }
 
     void MoveObject(int Direction)
 
