@@ -300,12 +300,13 @@ void loop() {
             // display Euler angles in degrees
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetEuler(euler, &q);
-            Serial.print("euler\t");
+//            Serial.print("euler\t");
             Serial.print(euler[0] * 180/M_PI);
             Serial.print("\t");
             Serial.print(euler[1] * 180/M_PI);
             Serial.print("\t");
             Serial.println(euler[2] * 180/M_PI);
+            
         #endif
 
         #ifdef OUTPUT_READABLE_YAWPITCHROLL
