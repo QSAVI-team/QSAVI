@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO.Ports; 
+using System.IO.Ports;
+using System.ComponentModel;
+
+
 
 public class Binary_Translation : MonoBehaviour {
 
     public float speed;
-
+  
     private float amountToMove;
 
     SerialPort sp = new SerialPort("COM3", 115200);
@@ -14,6 +17,7 @@ public class Binary_Translation : MonoBehaviour {
 	void Start () {
         sp.Open();
         sp.ReadTimeout = 1;
+        
 
 	}
 	
@@ -27,6 +31,8 @@ public class Binary_Translation : MonoBehaviour {
                 MoveObject(sp.ReadByte()); // cant read byte by byte??? have to read vector
 
                 print(sp.ReadByte());
+                string POT = sp.ReadExisting();
+                Debug.Log(POT);
             }
             catch (System.Exception)
 
@@ -35,7 +41,7 @@ public class Binary_Translation : MonoBehaviour {
             }
         }
 
-        Debug.Log(sp.ReadByte());
+       
 
 
     }

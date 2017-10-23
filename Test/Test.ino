@@ -12,12 +12,12 @@ void loop() {
 
   int data = analogRead(vout);
   if(data > 511){
-    Serial.write ("1");
+    Serial.print("1");
     Serial.flush();
     delay(20);
   }
   else{
-    Serial.write("2");
+    Serial.print("2");
     Serial.flush();
     delay(20);
   }
