@@ -5,7 +5,7 @@ using System.IO.Ports;
 
 public class RotateCube : MonoBehaviour {
 
-	SerialPort sp = new SerialPort("COM5", 115200);
+	SerialPort sp = new SerialPort("COM4", 115200);
     float[] lastRotation = { 0, 0, 0 };
 	// Use this for initialization
 	void Start () {
