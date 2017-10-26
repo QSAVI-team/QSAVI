@@ -4,9 +4,11 @@ using UnityEngine;
 using System.IO.Ports;
 
 public class RotateCube : MonoBehaviour {
-
+    // public var port = "COM4"; 
 	SerialPort sp = new SerialPort("COM4", 115200);
     float[] lastRotation = { 0, 0, 0 };
+   //  public var calibrationRotation= Vector3 (0 ,1 ,4 ) // position pointing down at your side
+
 	// Use this for initialization
 	void Start () {
         sp.Open();
@@ -32,5 +34,8 @@ public class RotateCube : MonoBehaviour {
             lastRotation[2] = float.Parse(vec3[2]);
             sp.BaseStream.Flush();
         }
+        if button=[1]
+            transform.eulerAngles= calibrationRotation
+
 	}
 }

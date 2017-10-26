@@ -84,7 +84,7 @@ MPU6050 mpu;
 // uncomment "OUTPUT_READABLE_QUATERNION" if you want to see the actual
 // quaternion components in a [w, x, y, z] format (not best for parsing
 // on a remote host such as Processing or something though)
-//#define OUTPUT_READABLE_QUATERNION
+#define OUTPUT_READABLE_QUATERNION
 
 // uncomment "OUTPUT_READABLE_EULER" if you want to see Euler angles
 // (in degrees) calculated from the quaternions coming from the FIFO.
@@ -97,7 +97,7 @@ MPU6050 mpu;
 // from the FIFO. Note this also requires gravity vector calculations.
 // Also note that yaw/pitch/roll angles suffer from gimbal lock (for
 // more info, see: http://en.wikipedia.org/wiki/Gimbal_lock)
-#define OUTPUT_READABLE_YAWPITCHROLL
+//#define OUTPUT_READABLE_YAWPITCHROLL
 
 // uncomment "OUTPUT_READABLE_REALACCEL" if you want to see acceleration
 // components with gravity removed. This acceleration reference frame is
@@ -288,12 +288,13 @@ void loop() {
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             Serial.print("quat\t");
             Serial.print(q.w);
-            Serial.print("\t");
+            Serial.print(",");
             Serial.print(q.x);
-            Serial.print("\t");
+            Serial.print(",");
             Serial.print(q.y);
-            Serial.print("\t");
+            Serial.print(",");
             Serial.println(q.z);
+            
         #endif
 
         #ifdef OUTPUT_READABLE_EULER
