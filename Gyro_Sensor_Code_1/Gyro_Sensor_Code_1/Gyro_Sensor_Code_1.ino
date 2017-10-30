@@ -84,7 +84,7 @@ MPU6050 mpu;
 // uncomment "OUTPUT_READABLE_QUATERNION" if you want to see the actual
 // quaternion components in a [w, x, y, z] format (not best for parsing
 // on a remote host such as Processing or something though)
-// #define OUTPUT_READABLE_QUATERNION
+//#define OUTPUT_READABLE_QUATERNION
 
 // uncomment "OUTPUT_READABLE_EULER" if you want to see Euler angles
 // (in degrees) calculated from the quaternions coming from the FIFO.
@@ -116,7 +116,9 @@ MPU6050 mpu;
 // format used for the InvenSense teapot demo
 //#define OUTPUT_TEAPOT
 
-
+// This defines the calibrating button sensor. This sets the yaw/pitch/roll to 0/0/0
+// on the arduino if the button is pressed.
+#define BUTTON_PIN 3
 
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
 bool blinkState = false;
@@ -232,6 +234,8 @@ void setup() {
 
     // configure LED for output
     pinMode(LED_PIN, OUTPUT);
+    // Configure button for input
+    pinMode(BUTTON_PIN, INPUT);
 }
 
 
@@ -310,19 +314,33 @@ void loop() {
             
         #endif
 
+
+        // Button Condition Variable
+        int buttonState = 0;
+        
         #ifdef OUTPUT_READABLE_YAWPITCHROLL
+        // Setup the buttonState to read the status of the button
+        buttonState = digitalRead(BUTTON_PIN);
+        if (buttonState == LOW) // Condition if button is not pressed
+        {
             // display Euler angles in degrees
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
             //Serial.print("ypr,");
-//            Serial.print(ypr[0] * 180/M_PI);
-//            Serial.print(",");
-//            Serial.print(ypr[1] * 180/M_PI);
-//            Serial.print(",");
-//            Serial.println(ypr[2] * 180/M_PI);
-            Serial.write(ypr,3);
-            delay(20);
+            Serial.print(ypr[0] * 180/M_PI);
+            Serial.print(",");
+            Serial.print(ypr[1] * 180/M_PI);
+            Serial.print(",");
+            Serial.println(ypr[2] * 180/M_PI);
+            delay(10);
+        }
+        else // Condition if button is pressed
+        {
+          Serial.println("0,0,0");
+          delay(20);
+        }
+        
         #endif
 
         #ifdef OUTPUT_READABLE_REALACCEL
