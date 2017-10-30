@@ -1848,7 +1848,6 @@ GameObject:
   - component: {fileID: 1622880396}
   - component: {fileID: 1622880395}
   - component: {fileID: 1622880394}
-  - component: {fileID: 1622880399}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1926,17 +1925,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!114 &1622880399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1622880393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 869ffca7c0ad8154587cccdea6ef25c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1643721021
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1858524829}
   - component: {fileID: 1858524832}
-  - component: {fileID: 1858524833}
   m_Layer: 0
   m_Name: hand_L
   m_TagString: Untagged
@@ -2213,20 +2200,9 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1858524827}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 869ffca7c0ad8154587cccdea6ef25c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1858524833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858524827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89d1e4c7da99796439390bc823792559, type: 3}
+  m_Script: {fileID: 11500000, guid: 869ffca7c0ad8154587cccdea6ef25c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1899506811
