@@ -339,8 +339,12 @@ void loop() {
         else // Condition if button is pressed
         {
           Serial.print("2,");
-          Serial.print("0,0,0");
-          delay(20);
+          Serial.print(ypr[0] * 180/M_PI);
+          Serial.print(",");
+          Serial.print(ypr[1] * 180/M_PI);
+          Serial.print(",");
+          Serial.println(ypr[2] * 180/M_PI);
+          delay(10);
         }
         
         #endif
