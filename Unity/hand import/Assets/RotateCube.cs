@@ -6,7 +6,6 @@ using System.IO.Ports;
 public class RotateCube : MonoBehaviour {
     //public string port=""; 
 	SerialPort sp = new SerialPort("COM3", 115200);
-    float[] lastRotation = { 0, 0, 0 };
     float[] caliRotation = { 0, 0, 0 }; // position pointing down at your side
 
 	// Use this for initialization
@@ -35,16 +34,12 @@ public class RotateCube : MonoBehaviour {
             }
             if (vec3[0] == "1") // delimiter representing rotation
             {
-                transform.Rotate(                           //parse each value from a string to a float
-                        float.Parse(vec3[0]) - lastRotation[0], // - caliRotation[0],
-                        float.Parse(vec3[1]) - lastRotation[1], //- caliRotation[1],
-                        float.Parse(vec3[2]) - lastRotation[2], //- caliRotation[2],
-                        Space.Self
+                transform.localEulerAngles= new Vector3(                         //parse each value from a string to a float
+                        float.Parse(vec3[1]), // - caliRotation[0],
+                        float.Parse(vec3[2]) , //- caliRotation[1],
+                        float.Parse(vec3[3])  //- caliRotation[2],
                         );
-                lastRotation[0] = float.Parse(vec3[0]); //set new values for the most recent rotation
-                lastRotation[1] = float.Parse(vec3[1]);
-                lastRotation[2] = float.Parse(vec3[2]);
-                sp.BaseStream.Flush();
+              
             }
             /*
             if (vec3[0] == "0")// delimiter representing translation
