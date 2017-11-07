@@ -328,6 +328,7 @@ void loop() {
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
             //Serial.print("ypr,");
+            Serial.print("1,");
             Serial.print(ypr[0] * 180/M_PI);
             Serial.print(",");
             Serial.print(ypr[1] * 180/M_PI);
@@ -337,7 +338,8 @@ void loop() {
         }
         else // Condition if button is pressed
         {
-          Serial.println("0,0,0");
+          Serial.print("2,");
+          Serial.print("0,0,0");
           delay(20);
         }
         
@@ -349,11 +351,12 @@ void loop() {
             mpu.dmpGetAccel(&aa, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-            Serial.print("areal\t");
+            Serial.print("0,");
+            Serial.print(",");
             Serial.print(aaReal.x);
-            Serial.print("\t");
+            Serial.print(",");
             Serial.print(aaReal.y);
-            Serial.print("\t");
+            Serial.print(",");
             Serial.println(aaReal.z);
             delay(20);
         #endif
