@@ -321,31 +321,24 @@ void loop() {
         #ifdef OUTPUT_READABLE_YAWPITCHROLL
         // Setup the buttonState to read the status of the button
         buttonState = digitalRead(BUTTON_PIN);
-        if (buttonState == LOW) // Condition if button is not pressed
-        {
-            // display Euler angles in degrees
-            mpu.dmpGetQuaternion(&q, fifoBuffer);
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-            //Serial.print("ypr,");
-            Serial.print("1,");
-            Serial.print(ypr[0] * 180/M_PI);
-            Serial.print(",");
-            Serial.print(ypr[1] * 180/M_PI);
-            Serial.print(",");
-            Serial.println(ypr[2] * 180/M_PI);
-            delay(10);
+        if (buttonState == LOW) // Condition if button is not pressed
+        {
+          Serial.print("1,");
         }
         else // Condition if button is pressed
         {
           Serial.print("2,");
+        }
           Serial.print(ypr[0] * 180/M_PI);
           Serial.print(",");
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print(",");
           Serial.println(ypr[2] * 180/M_PI);
-          delay(10);
-        }
+          delay(30);
+        
         
         #endif
 
