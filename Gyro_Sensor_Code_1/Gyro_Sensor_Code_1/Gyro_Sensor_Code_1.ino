@@ -97,7 +97,7 @@ MPU6050 mpu;
 // from the FIFO. Note this also requires gravity vector calculations.
 // Also note that yaw/pitch/roll angles suffer from gimbal lock (for
 // more info, see: http://en.wikipedia.org/wiki/Gimbal_lock)
-#define OUTPUT_READABLE_YAWPITCHROLL
+//#define OUTPUT_READABLE_YAWPITCHROLL
 
 // uncomment "OUTPUT_READABLE_REALACCEL" if you want to see acceleration
 // components with gravity removed. This acceleration reference frame is
@@ -287,6 +287,11 @@ void loop() {
         // (this lets us immediately read more without waiting for an interrupt)
         fifoCount -= packetSize;
 
+        // Button Condition Variable
+        int buttonState = 0;
+        // Setup the buttonState to read the status of the button
+        buttonState = digitalRead(BUTTON_PIN);
+
         #ifdef OUTPUT_READABLE_QUATERNION
             // display quaternion values in easy matrix form: w x y z
             mpu.dmpGetQuaternion(&q, fifoBuffer);
@@ -306,6 +311,14 @@ void loop() {
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetEuler(euler, &q);
 //            Serial.print("euler\t");
+    if (buttonState == LOW) // Condition if button is not pressed
+        {
+          Serial.print("1,");
+        }
+        else // Condition if button is pressed
+        {
+          Serial.print("2,");
+        }
             Serial.print(euler[0] * 180/M_PI);
             Serial.print("\t");
             Serial.print(euler[1] * 180/M_PI);
@@ -315,12 +328,9 @@ void loop() {
         #endif
 
 
-        // Button Condition Variable
-        int buttonState = 0;
-        
+
         #ifdef OUTPUT_READABLE_YAWPITCHROLL
-        // Setup the buttonState to read the status of the button
-        buttonState = digitalRead(BUTTON_PIN);
+        
         mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
@@ -337,7 +347,7 @@ void loop() {
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print(",");
           Serial.println(ypr[2] * 180/M_PI);
-          delay(30);
+          delay(20);
         
         
         #endif

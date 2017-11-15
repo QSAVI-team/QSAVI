@@ -19,12 +19,12 @@ public class Rotate_Palm : MonoBehaviour
     void Update()
     {
         string line = sp.ReadLine();//Read line output from arduino code
-        //Debug.Log(line);
+        Debug.Log(line);
         string[] vec3 = line.Split(',');//split the line at each tab (this is how the code currently formats the output)
-        Debug.Log(vec3);
+        //Debug.Log(vec3);
 
-        if (vec3[1] != "" && vec3[2] != "" && vec3[3] != "") //check that no values are blank
-        {
+       // if (vec3[0] != "" && vec3[1] != "" && vec3[2] != "" && vec3[3] != "") //check that no values are blank
+       // {
             if (vec3[0] == "2") // delimiter representing calibration
             {
                 caliRotation[0] = float.Parse(vec3[1]);
@@ -32,7 +32,8 @@ public class Rotate_Palm : MonoBehaviour
                 caliRotation[2] = float.Parse(vec3[3]);
 
                 Debug.Log(caliRotation);
-                transform.localEulerAngles = new Vector3(                         //parse each value from a string to a float
+            // transform.localEulerAngles = new Vector3(                         // may fail if angle is above 360 parse each value from a string to a float
+            transform.Rotate= new Vector3(
                     float.Parse(vec3[1]) - caliRotation[0],
                     float.Parse(vec3[2]) - caliRotation[1],
                     float.Parse(vec3[3]) - caliRotation[2]
@@ -40,10 +41,11 @@ public class Rotate_Palm : MonoBehaviour
             }
             else if (vec3[0] == "1") // delimiter representing rotation
             {
-                transform.localEulerAngles = new Vector3(                         //parse each value from a string to a float
-                        float.Parse(vec3[1])- caliRotation[0],
-                        float.Parse(vec3[2]) - caliRotation[1],
-                        float.Parse(vec3[3]) - caliRotation[2]
+            // transform.localEulerAngles = new Vector3(                         //parse each value from a string to a float
+
+                    float.Parse(vec3[1])- caliRotation[0],
+                    float.Parse(vec3[2]) - caliRotation[1],
+                    float.Parse(vec3[3]) - caliRotation[2]
                         );
 
             }
@@ -64,6 +66,6 @@ public class Rotate_Palm : MonoBehaviour
             }
              */
 
-        }
+       // }
     }
 }
