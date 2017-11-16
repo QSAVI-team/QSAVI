@@ -8,7 +8,11 @@ public class Rotate_Palm : MonoBehaviour
     //public string port=""; 
     SerialPort sp = new SerialPort("COM3", 115200);
     float[] caliRotation = { 0, 0, 0 }; // position pointing down at your side
-
+    float x =  0 ;    float y =  0 ;    float z =  0 ;
+ 
+    float xo = 85.248f;
+    float yo = -52.267f;
+    float zo = -53.411f;
     // Use this for initialization
     void Start()
     {
@@ -19,9 +23,9 @@ public class Rotate_Palm : MonoBehaviour
     void Update()
     {
         string line = sp.ReadLine();//Read line output from arduino code
-        Debug.Log(line);
+        //Debug.Log(line);
         string[] vec3 = line.Split(',');//split the line at each tab (this is how the code currently formats the output)
-        //Debug.Log(vec3);
+        
 
        // if (vec3[0] != "" && vec3[1] != "" && vec3[2] != "" && vec3[3] != "") //check that no values are blank
        // {
@@ -32,40 +36,47 @@ public class Rotate_Palm : MonoBehaviour
                 caliRotation[2] = float.Parse(vec3[3]);
 
                 Debug.Log(caliRotation);
-            // transform.localEulerAngles = new Vector3(                         // may fail if angle is above 360 parse each value from a string to a float
-            transform.Rotate= new Vector3(
-                    float.Parse(vec3[1]) - caliRotation[0],
+
+            transform.localEulerAngles = new Vector3(xo ,yo ,zo ); // set to original hand rotations if your attaching it to forearm set it to 0,0,0,
+            /*  what we had before 
+             *      transform.localEulerAngles=new Vector3(
+                    float.Parse(vec3[1]) - caliRotation[0],             // 
                     float.Parse(vec3[2]) - caliRotation[1],
-                    float.Parse(vec3[3]) - caliRotation[2]
-                );
+                    float.Parse(vec3[3]) - caliRotation[2]);
+                */
             }
             else if (vec3[0] == "1") // delimiter representing rotation
             {
-            // transform.localEulerAngles = new Vector3(                         //parse each value from a string to a float
 
-                    float.Parse(vec3[1])- caliRotation[0],
-                    float.Parse(vec3[2]) - caliRotation[1],
-                    float.Parse(vec3[3]) - caliRotation[2]
-                        );
-
-            }
+            x = float.Parse(vec3[1]) - caliRotation[0];
+            y = float.Parse(vec3[2]) - caliRotation[1];
+            z = float.Parse(vec3[3]) - caliRotation[2];
+                if (x > 360 || y > 360 || z > 360)
+                {
+                    Debug.Log("error euler larger than 360");
+                    x = 359; y = 359; z = 359;
+                }
+            transform.localEulerAngles = new Vector3(x, y, z);                        //parse each value from a string to a float
             
-            /*
-            else (vec3[0] == "0")// delimiter representing translation
-            {
-                transform.Translate(
-                    float.Parse(vec3[0]) - lastPosition[0], // - caliRotation[0],
-                        float.Parse(vec3[1]) - lastPosition[1], //- caliRotation[1],
-                        float.Parse(vec3[2]) - lastPosition[2], //- caliRotation[2],
-                        Space.Self
-                        );
-                lastPosition[0] = float.Parse(vec3[0]); //set new values for the most recent rotation
-                lastPosition[1] = float.Parse(vec3[1]);
-                lastPosition[2] = float.Parse(vec3[2]);
-                sp.BaseStream.Flush();
             }
-             */
+        
+        Debug.Log(vec3);
+        /*
+        else (vec3[0] == "0")// delimiter representing translation
+        {
+            transform.Translate(
+                float.Parse(vec3[0]) - lastPosition[0], // - caliRotation[0],
+                    float.Parse(vec3[1]) - lastPosition[1], //- caliRotation[1],
+                    float.Parse(vec3[2]) - lastPosition[2], //- caliRotation[2],
+                    Space.Self
+                    );
+            lastPosition[0] = float.Parse(vec3[0]); //set new values for the most recent rotation
+            lastPosition[1] = float.Parse(vec3[1]);
+            lastPosition[2] = float.Parse(vec3[2]);
+            sp.BaseStream.Flush();
+        }
+         */
 
-       // }
+        // }
     }
 }
