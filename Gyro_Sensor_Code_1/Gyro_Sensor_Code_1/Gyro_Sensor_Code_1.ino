@@ -90,7 +90,7 @@ MPU6050 mpu;
 // (in degrees) calculated from the quaternions coming from the FIFO.
 // Note that Euler angles suffer from gimbal lock (for more info, see
 // http://en.wikipedia.org/wiki/Gimbal_lock)
-//#define OUTPUT_READABLE_EULER
+#define OUTPUT_READABLE_EULER
 
 // uncomment "OUTPUT_READABLE_YAWPITCHROLL" if you want to see the yaw/
 // pitch/roll angles (in degrees) calculated from the quaternions coming
@@ -273,7 +273,7 @@ void loop() {
     if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
         // reset so we can continue cleanly
         mpu.resetFIFO();
-        Serial.println(F("FIFO overflow!"));
+        //Serial.println(F("FIFO overflow!"));
 
     // otherwise, check for DMP data ready interrupt (this should happen frequently)
     } else if (mpuIntStatus & 0x02) {
@@ -319,11 +319,12 @@ void loop() {
         {
           Serial.print("2,");
         }
-            Serial.print(euler[0] * 180/M_PI);
-            Serial.print("\t");
-            Serial.print(euler[1] * 180/M_PI);
-            Serial.print("\t");
-            Serial.println(euler[2] * 180/M_PI);
+            Serial.print(euler[0] * 180/M_PI); // red
+            Serial.print(",");
+            Serial.print(euler[1] * 2* 180/M_PI); // green??
+            Serial.print(",");
+            Serial.println(euler[2] * 180/M_PI); //yellow
+            delay(15);
             
         #endif
 
@@ -404,3 +405,4 @@ void loop() {
         digitalWrite(LED_PIN, blinkState);
     }
 }
+

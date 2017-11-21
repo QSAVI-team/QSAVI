@@ -48,9 +48,9 @@ public class Rotate_Palm : MonoBehaviour
             else if (vec3[0] == "1") // delimiter representing rotation
             {
 
-            x = float.Parse(vec3[1]) - caliRotation[0];
-            y = float.Parse(vec3[2]) - caliRotation[1];
-            z = float.Parse(vec3[3]) - caliRotation[2];
+            x = float.Parse(vec3[1]) - caliRotation[0] + xo ;
+            y = float.Parse(vec3[2]) - caliRotation[1] + yo ;
+            z = float.Parse(vec3[3]) - caliRotation[2] + zo ;
                 if (x > 360 || y > 360 || z > 360)
                 {
                     Debug.Log("error euler larger than 360");
