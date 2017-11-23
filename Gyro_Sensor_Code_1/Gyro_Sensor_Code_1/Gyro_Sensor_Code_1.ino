@@ -321,7 +321,9 @@ void loop() {
         #ifdef OUTPUT_READABLE_YAWPITCHROLL
         // Setup the buttonState to read the status of the button
         buttonState = digitalRead(BUTTON_PIN);
-        if (buttonState == LOW) // Condition if button is not pressed
+        // If using button, set if condition buttonstate to LOW
+        // If using touch sensor, use HIGH
+        if (buttonState == HIGH) // Condition if button is not pressed, LOW for button, HIGH for touch sensor
         {
             // display Euler angles in degrees
             mpu.dmpGetQuaternion(&q, fifoBuffer);
@@ -334,17 +336,21 @@ void loop() {
             Serial.print(ypr[1] * 180/M_PI);
             Serial.print(",");
             Serial.println(ypr[2] * 180/M_PI);
-            delay(10);
+//            delay(10);
         }
-        else // Condition if button is pressed
+        else if (buttonState == LOW) // Condition if button is pressed, HIGH for button, LOW for touch sensor
         {
+          // display Euler angles in degrees
+          mpu.dmpGetQuaternion(&q, fifoBuffer);
+          mpu.dmpGetGravity(&gravity, &q);
+          mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);          
           Serial.print("2,");
           Serial.print(ypr[0] * 180/M_PI);
           Serial.print(",");
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print(",");
           Serial.println(ypr[2] * 180/M_PI);
-          delay(10);
+//          delay(10);
         }
         
         #endif
@@ -362,7 +368,7 @@ void loop() {
             Serial.print(aaReal.y);
             Serial.print(",");
             Serial.println(aaReal.z);
-            delay(20);
+//            delay(20);
         #endif
 
         #ifdef OUTPUT_READABLE_WORLDACCEL
@@ -379,7 +385,7 @@ void loop() {
             Serial.print(aaWorld.y);
             Serial.print("\t");
             Serial.println(aaWorld.z);
-            delay(20);
+//            delay(20);
         #endif
     
         #ifdef OUTPUT_TEAPOT
