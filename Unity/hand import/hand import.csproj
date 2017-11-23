@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Binary_Translation.cs" />
-    <Compile Include="Assets\RotateCube.cs" />
+    <Compile Include="Assets\Rotate_Palm.cs" />
     <Compile Include="Assets\Translate_palm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
