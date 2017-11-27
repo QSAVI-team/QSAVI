@@ -90,14 +90,14 @@ MPU6050 mpu;
 // (in degrees) calculated from the quaternions coming from the FIFO.
 // Note that Euler angles suffer from gimbal lock (for more info, see
 // http://en.wikipedia.org/wiki/Gimbal_lock)
-#define OUTPUT_READABLE_EULER
+//#define OUTPUT_READABLE_EULER
 
 // uncomment "OUTPUT_READABLE_YAWPITCHROLL" if you want to see the yaw/
 // pitch/roll angles (in degrees) calculated from the quaternions coming
 // from the FIFO. Note this also requires gravity vector calculations.
 // Also note that yaw/pitch/roll angles suffer from gimbal lock (for
 // more info, see: http://en.wikipedia.org/wiki/Gimbal_lock)
-//#define OUTPUT_READABLE_YAWPITCHROLL
+#define OUTPUT_READABLE_YAWPITCHROLL
 
 // uncomment "OUTPUT_READABLE_REALACCEL" if you want to see acceleration
 // components with gravity removed. This acceleration reference frame is
@@ -273,7 +273,7 @@ void loop() {
     if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
         // reset so we can continue cleanly
         mpu.resetFIFO();
-        //Serial.println(F("FIFO overflow!"));
+        Serial.println(F("FIFO overflow!"));
 
     // otherwise, check for DMP data ready interrupt (this should happen frequently)
     } else if (mpuIntStatus & 0x02) {
@@ -286,11 +286,6 @@ void loop() {
         // track FIFO count here in case there is > 1 packet available
         // (this lets us immediately read more without waiting for an interrupt)
         fifoCount -= packetSize;
-
-        // Button Condition Variable
-        int buttonState = 0;
-        // Setup the buttonState to read the status of the button
-        buttonState = digitalRead(BUTTON_PIN);
 
         #ifdef OUTPUT_READABLE_QUATERNION
             // display quaternion values in easy matrix form: w x y z
@@ -311,45 +306,52 @@ void loop() {
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetEuler(euler, &q);
 //            Serial.print("euler\t");
-    if (buttonState == LOW) // Condition if button is not pressed
-        {
-          Serial.print("1,");
-        }
-        else // Condition if button is pressed
-        {
-          Serial.print("2,");
-        }
-            Serial.print(euler[0] * 180/M_PI); // red
-            Serial.print(",");
-            Serial.print(euler[1] * 2* 180/M_PI); // green??
-            Serial.print(",");
-            Serial.println(euler[2] * 180/M_PI); //yellow
-            delay(15);
+            Serial.print(euler[0] * 180/M_PI);
+            Serial.print("\t");
+            Serial.print(euler[1] * 180/M_PI);
+            Serial.print("\t");
+            Serial.println(euler[2] * 180/M_PI);
             
         #endif
 
 
-
-        #ifdef OUTPUT_READABLE_YAWPITCHROLL
+        // Button Condition Variable
+        int buttonState = 0;
         
-        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        #ifdef OUTPUT_READABLE_YAWPITCHROLL
+        // Setup the buttonState to read the status of the button
+        buttonState = digitalRead(BUTTON_PIN);
+        // If using button, set if condition buttonstate to LOW
+        // If using touch sensor, use HIGH
+        if (buttonState == HIGH) // Condition if button is not pressed, LOW for button, HIGH for touch sensor
+        {
+            // display Euler angles in degrees
+            mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-        if (buttonState == LOW) // Condition if button is not pressed
-        {
-          Serial.print("1,");
+            //Serial.print("ypr,");
+            Serial.print("1,");
+            Serial.print(ypr[0] * 180/M_PI);
+            Serial.print(",");
+            Serial.print(ypr[1] * 180/M_PI);
+            Serial.print(",");
+            Serial.println(ypr[2] * 180/M_PI);
+//            delay(10);
         }
-        else // Condition if button is pressed
+        else if (buttonState == LOW) // Condition if button is pressed, HIGH for button, LOW for touch sensor
         {
+          // display Euler angles in degrees
+          mpu.dmpGetQuaternion(&q, fifoBuffer);
+          mpu.dmpGetGravity(&gravity, &q);
+          mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);          
           Serial.print("2,");
-        }
           Serial.print(ypr[0] * 180/M_PI);
           Serial.print(",");
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print(",");
           Serial.println(ypr[2] * 180/M_PI);
-          delay(20);
-        
+//          delay(10);
+        }
         
         #endif
 
@@ -366,7 +368,7 @@ void loop() {
             Serial.print(aaReal.y);
             Serial.print(",");
             Serial.println(aaReal.z);
-            delay(20);
+//            delay(20);
         #endif
 
         #ifdef OUTPUT_READABLE_WORLDACCEL
@@ -383,7 +385,7 @@ void loop() {
             Serial.print(aaWorld.y);
             Serial.print("\t");
             Serial.println(aaWorld.z);
-            delay(20);
+//            delay(20);
         #endif
     
         #ifdef OUTPUT_TEAPOT
@@ -405,4 +407,3 @@ void loop() {
         digitalWrite(LED_PIN, blinkState);
     }
 }
-
