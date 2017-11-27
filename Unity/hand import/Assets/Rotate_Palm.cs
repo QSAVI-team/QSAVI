@@ -59,7 +59,7 @@ public class Rotate_Palm : MonoBehaviour
             transform.localEulerAngles = new Vector3(x, y, z);                        //parse each value from a string to a float
             
             }
-        
+        //transform.Rotate()
         Debug.Log(vec3);
         /*
         else (vec3[0] == "0")// delimiter representing translation
