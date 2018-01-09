@@ -7,12 +7,9 @@ public class Rotate_Palm : MonoBehaviour
 {
     //public string port=""; 
     SerialPort sp = new SerialPort("COM3", 115200);
-    float[] caliRotation = { 0, 0, 0 }; // position pointing down at your side
-    float x =  0 ;    float y =  0 ;    float z =  0 ;
- 
-    float xo = 85.248f;
-    float yo = -52.267f;
-    float zo = -53.411f;
+    float[] caliRotation = { 0, 0, 0 }; // position pointing real hand down at your side
+    float x =  0 ;          float y =  0 ;          float z =  0 ;
+    float xo = 85.248f;     float yo = -52.267f;    float zo = -53.411f; // horizontal hand position, want to update later to being down
     // Use this for initialization
     void Start()
     {
@@ -51,11 +48,11 @@ public class Rotate_Palm : MonoBehaviour
             x = float.Parse(vec3[1]) - caliRotation[0] + xo ;
             y = float.Parse(vec3[2]) - caliRotation[1] + yo ;
             z = float.Parse(vec3[3]) - caliRotation[2] + zo ;
-                if (x > 360 || y > 360 || z > 360)
+               /* if (x > 360 || y > 360 || z > 360)
                 {
                     Debug.Log("error euler larger than 360");
                     x = 359; y = 359; z = 359;
-                }
+                }*/
             transform.localEulerAngles = new Vector3(x, y, z);                        //parse each value from a string to a float
             
             }

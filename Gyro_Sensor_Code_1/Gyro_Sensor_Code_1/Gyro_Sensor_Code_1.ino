@@ -329,14 +329,7 @@ void loop() {
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-            //Serial.print("ypr,");
-            Serial.print("1,");
-            Serial.print(ypr[0] * 180/M_PI);
-            Serial.print(",");
-            Serial.print(ypr[1] * 180/M_PI);
-            Serial.print(",");
-            Serial.println(ypr[2] * 180/M_PI);
-//            delay(10);
+          Serial.print("1,");
         }
         else if (buttonState == LOW) // Condition if button is pressed, HIGH for button, LOW for touch sensor
         {
@@ -345,13 +338,14 @@ void loop() {
           mpu.dmpGetGravity(&gravity, &q);
           mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);          
           Serial.print("2,");
+        }
           Serial.print(ypr[0] * 180/M_PI);
           Serial.print(",");
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print(",");
           Serial.println(ypr[2] * 180/M_PI);
-//          delay(10);
-        }
+//          delay(25);
+        
         
         #endif
 
