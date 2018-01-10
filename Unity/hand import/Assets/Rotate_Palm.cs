@@ -24,8 +24,8 @@ public class Rotate_Palm : MonoBehaviour
         string[] vec3 = line.Split(',');//split the line at each tab (this is how the code currently formats the output)
         
 
-       // if (vec3[0] != "" && vec3[1] != "" && vec3[2] != "" && vec3[3] != "") //check that no values are blank
-       // {
+       if (vec3[0] != "" && vec3[1] != "" && vec3[2] != "" && vec3[3] != "") //check that no values are blank
+        {
             if (vec3[0] == "2") // delimiter representing calibration
             {
                 caliRotation[0] = float.Parse(vec3[1]);
@@ -46,7 +46,7 @@ public class Rotate_Palm : MonoBehaviour
             {
 
             x = float.Parse(vec3[1]) - caliRotation[0] + xo ;
-            y = float.Parse(vec3[2]) - caliRotation[1] + yo ;
+            y = float.Parse(vec3[2]) - caliRotation[1]+ yo ;
             z = float.Parse(vec3[3]) - caliRotation[2] + zo ;
                /* if (x > 360 || y > 360 || z > 360)
                 {
@@ -74,6 +74,6 @@ public class Rotate_Palm : MonoBehaviour
         }
          */
 
-        // }
+        }
     }
 }
