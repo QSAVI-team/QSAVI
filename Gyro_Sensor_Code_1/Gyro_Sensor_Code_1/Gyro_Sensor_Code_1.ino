@@ -1,4 +1,3 @@
-// I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class using DMP (MotionApps v2.0)
 // 6/21/2012 by Jeff Rowberg <jeff@rowberg.net>
 // Updates should (hopefully) always be available at https://github.com/jrowberg/i2cdevlib
 //
@@ -24,7 +23,7 @@ Copyright (c) 2012 Jeff Rowberg
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sel
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
@@ -329,14 +328,7 @@ void loop() {
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-            //Serial.print("ypr,");
-            Serial.print("1,");
-            Serial.print(ypr[0] * 180/M_PI);
-            Serial.print(",");
-            Serial.print(ypr[1] * 180/M_PI);
-            Serial.print(",");
-            Serial.println(ypr[2] * 180/M_PI);
-//            delay(10);
+          Serial.print("1,");
         }
         else if (buttonState == LOW) // Condition if button is pressed, HIGH for button, LOW for touch sensor
         {
@@ -345,13 +337,14 @@ void loop() {
           mpu.dmpGetGravity(&gravity, &q);
           mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);          
           Serial.print("2,");
+        }
           Serial.print(ypr[0] * 180/M_PI);
           Serial.print(",");
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print(",");
           Serial.println(ypr[2] * 180/M_PI);
-//          delay(10);
-        }
+          delay(20);
+        
         
         #endif
 
