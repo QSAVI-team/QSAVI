@@ -5,8 +5,9 @@ using System.IO.Ports;
 
 public class Rotate_Palm : MonoBehaviour
 {
-    //public string port=""; 
-    SerialPort sp = new SerialPort(constants.COMport, 115200);
+	public static string portName = Constants.COM_PORT; 
+	public static int baudRate = Constants.COM_BAUD; 
+	SerialPort sp = new SerialPort(portName, baudRate);
     float[] caliRotation = { 0, 0, 0 }; // position pointing real hand down at your side
     float x =  0 ;          float y =  0 ;          float z =  0 ;
     float xo = 85.248f;     float yo = -52.267f;    float zo = -53.411f; // horizontal hand position, want to update later to being down
@@ -23,7 +24,14 @@ public class Rotate_Palm : MonoBehaviour
         //Debug.Log(line);
         string[] vec3 = line.Split(',');//split the line at each tab (this is how the code currently formats the output)
         
+		if (vec3.Length < 4) {
+			return;
+		}
 
+		transform.localRotation = new Quaternion (float.Parse(vec3 [0]), float.Parse(vec3 [1]), float.Parse(vec3 [2]), float.Parse(vec3 [3]));
+
+		return;
+			
        if (vec3[0] != "" && vec3[1] != "" && vec3[2] != "" && vec3[3] != "") //check that no values are blank
         {
             if (vec3[0] == "2") // delimiter representing calibration
@@ -46,15 +54,17 @@ public class Rotate_Palm : MonoBehaviour
             {
 
             x = float.Parse(vec3[1]) - caliRotation[0] + xo ;
-            y = float.Parse(vec3[2]) - caliRotation[1]+ yo ;
+            y = float.Parse(vec3[2]) - caliRotation[1] + yo ;
             z = float.Parse(vec3[3]) - caliRotation[2] + zo ;
                /* if (x > 360 || y > 360 || z > 360)
                 {
                     Debug.Log("error euler larger than 360");
                     x = 359; y = 359; z = 359;
                 }*/
-            transform.localEulerAngles = new Vector3(x, y, z);                        //parse each value from a string to a float
+           // transform.localEulerAngles = new Vector3(x, y, z);                        //parse each value from a string to a float
             
+				Quaternion currentRotation = Quaternion.Euler (x, y, z);
+				transform.localRotation = currentRotation;
             }
         //transform.Rotate()
         Debug.Log(vec3);
