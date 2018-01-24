@@ -6,7 +6,7 @@ using System.IO.Ports;
 public class Rotate_Palm : MonoBehaviour
 {
     //public string port=""; 
-    SerialPort sp = new SerialPort("COM3", 115200);
+    SerialPort sp = new SerialPort(constants.COMport, 115200);
     float[] caliRotation = { 0, 0, 0 }; // position pointing real hand down at your side
     float x =  0 ;          float y =  0 ;          float z =  0 ;
     float xo = 85.248f;     float yo = -52.267f;    float zo = -53.411f; // horizontal hand position, want to update later to being down

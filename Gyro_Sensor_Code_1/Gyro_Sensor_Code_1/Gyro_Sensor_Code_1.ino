@@ -118,6 +118,7 @@ MPU6050 mpu;
 // This defines the calibrating button sensor. This sets the yaw/pitch/roll to 0/0/0
 // on the arduino if the button is pressed.
 #define BUTTON_PIN 3
+#define POT_PIN 3
 
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
 bool blinkState = false;
@@ -313,13 +314,14 @@ void loop() {
             
         #endif
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Button Condition Variable
         int buttonState = 0;
-        
+        int pot=0;
         #ifdef OUTPUT_READABLE_YAWPITCHROLL
         // Setup the buttonState to read the status of the button
         buttonState = digitalRead(BUTTON_PIN);
+         pot=analogRead(POT_PIN);
         // If using button, set if condition buttonstate to LOW
         // If using touch sensor, use HIGH
         if (buttonState == HIGH) // Condition if button is not pressed, LOW for button, HIGH for touch sensor
@@ -343,11 +345,13 @@ void loop() {
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print(",");
           Serial.println(ypr[2] * 180/M_PI);
+          //Serial.print(",");
+          //Serial.println(pot);
           delay(20);
         
         
         #endif
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         #ifdef OUTPUT_READABLE_REALACCEL
             // display real acceleration, adjusted to remove gravity
             mpu.dmpGetQuaternion(&q, fifoBuffer);
