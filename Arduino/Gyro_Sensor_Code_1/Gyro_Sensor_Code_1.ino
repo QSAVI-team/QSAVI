@@ -154,11 +154,16 @@ void dmpDataReady() {
 }
 
 // ================================================================
-// ===                          TIMING                          ===
+// ===                       DATA SENDING                       ===
 // ================================================================
 
 // Will be un-used
 #define SEND_DELAY 100 // ms
+#define WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+
+// ================================================================
+// ===                          TIMING                          ===
+// ================================================================
 
 #define HEARBEAT_LED_BLINK_TIME 500 // ms
 unsigned long lastHearbeadLedBlinkTime = 0;
@@ -298,9 +303,11 @@ void loop() {
 
 #ifdef OUTPUT_READABLE_QUATERNION
 
+#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
     // Wait for request (any 1 byte)
     while (Serial.available() > 0) {
       if (Serial.read() > 0) {
+#endif
 
         // display quaternion values in easy matrix form: w, x, y, z
         mpu.dmpGetQuaternion(&q, fifoBuffer);
@@ -313,8 +320,10 @@ void loop() {
         Serial.print(",");
         Serial.println(q.z);
 
+#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
       }
     }
+#endif
 
 #endif
 
