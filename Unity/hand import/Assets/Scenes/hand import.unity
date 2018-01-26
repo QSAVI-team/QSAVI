@@ -2165,9 +2165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec8de2bbb6fda041a010525c980e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setCOMPort: COM5
+  setCOMPort: COM3
   setCOMBaud: 115200
-  setSerialPortRefreshPeriod: 0.05
+  setSerialPortRefreshPeriod: 0.01
   setSerialPortRequestDelayPeriod: 0.0005
 --- !u!4 &1728714860
 Transform:
