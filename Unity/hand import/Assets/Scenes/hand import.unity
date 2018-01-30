@@ -1599,7 +1599,7 @@ MonoBehaviour:
   invertZ: 0
   offsetRotaion: {x: 0, y: 0, z: 0}
   additionalRotaion: {x: 0, y: 0, z: 0}
-  setSenterRotaionNow: 0
+  setSenterRotationNow: 0
 --- !u!23 &1361439854
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1875,7 +1875,7 @@ MonoBehaviour:
   invertZ: 0
   offsetRotaion: {x: -90, y: 0, z: 0}
   additionalRotaion: {x: 0, y: 0, z: 0}
-  setSenterRotaionNow: 0
+  setSenterRotationNow: 0
 --- !u!1 &1535076095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,7 +2148,7 @@ GameObject:
   - component: {fileID: 1728714860}
   - component: {fileID: 1728714859}
   m_Layer: 0
-  m_Name: Constants
+  m_Name: Arduino Interface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

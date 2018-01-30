@@ -1,9 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Rotate_Palm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Binary_Translation.cs">
     <Files>
-      <File FileName="Assets\Scripts\Constants.cs" Line="18" Column="17" />
-      <File FileName="Assets\Scripts\Rotate_Palm.cs" Line="159" Column="5" />
+      <File FileName="Assets\Scripts\Rotate_Palm.cs" Line="70" Column="38" />
+      <File FileName="Assets\Scripts\ArduinoInterface.cs" Line="59" Column="37" />
+      <File FileName="Assets\Scripts\Translate_Palm.cs" Line="39" Column="2" />
+      <File FileName="Assets\Scripts\Binary_Translation.cs" Line="61" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
