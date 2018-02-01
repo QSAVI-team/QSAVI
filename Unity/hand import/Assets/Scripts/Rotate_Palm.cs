@@ -6,7 +6,7 @@ public class Rotate_Palm : MonoBehaviour {
 
 	// ------------------------- ORIENTAION -------------------------
 
-	public enum OrientaionMode {
+	public enum OrientationMode {
 		X_Y_Z,
 		X_Z_Y,
 		Y_X_Z,
@@ -14,7 +14,7 @@ public class Rotate_Palm : MonoBehaviour {
 		Z_X_Y,
 		Z_Y_X
 	};
-	public OrientaionMode orientaionMode = OrientaionMode.X_Y_Z;
+	public OrientationMode orientaionMode = OrientationMode.X_Y_Z;
 
 	public bool negativeX = false;
 	public bool negativeY = false;
@@ -78,17 +78,17 @@ public class Rotate_Palm : MonoBehaviour {
 			// Construct input quaternion from read data
 			Quaternion inputQuaternion = Quaternion.identity;
 
-			if(orientaionMode == OrientaionMode.X_Y_Z) {
+			if(orientaionMode == OrientationMode.X_Y_Z) {
 				inputQuaternion = new Quaternion (x, y, z, w);
-			} else if(orientaionMode == OrientaionMode.X_Z_Y) {
+			} else if(orientaionMode == OrientationMode.X_Z_Y) {
 				inputQuaternion = new Quaternion (x, z, y, w);
-			} else if(orientaionMode == OrientaionMode.Y_X_Z) {
+			} else if(orientaionMode == OrientationMode.Y_X_Z) {
 				inputQuaternion = new Quaternion (y, x, z, w);
-			} else if(orientaionMode == OrientaionMode.Y_Z_X) {
+			} else if(orientaionMode == OrientationMode.Y_Z_X) {
 				inputQuaternion = new Quaternion (y, z, x, w);
-			} else if(orientaionMode == OrientaionMode.Z_X_Y) {
+			} else if(orientaionMode == OrientationMode.Z_X_Y) {
 				inputQuaternion = new Quaternion (z, x, y, w);
-			} else if(orientaionMode == OrientaionMode.Z_Y_X) {
+			} else if(orientaionMode == OrientationMode.Z_Y_X) {
 				inputQuaternion = new Quaternion (z, y, x, w);
 			}
 

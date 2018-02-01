@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
 
-public float min = 0;
-public float max = 0;
-public int potMin = 0;
-public int potMax = 676;
-public int baudRate = 0;
-public string portName = "";
-float range = max - min;
+
 
 public class Rotate_Finger : MonoBehaviour
 {   // ------------------------- SERIAL PORT -------------------------
@@ -20,10 +14,17 @@ public class Rotate_Finger : MonoBehaviour
 
     float serialPortRefreshPeriod;
     float serialPortRequestDelayPeriod;
-}
-// Use this for initialization
-void Start()
-{
+    public float min = 0;
+    public float max = 0;
+    public int potMin = 0;
+    public int potMax = 676;
+    public int baudRate = 0;
+    public string portName = "";
+   
+
+  // Use this for initialization
+
+    float range = max - min;
     // Setup timing
     serialPortRefreshPeriod = Constants.SERIAL_PORT_REFRESH_PERIOD;
     serialPortRequestDelayPeriod = Constants.SERIAL_PORT_REQUEST_DELAY_PERIOD;
