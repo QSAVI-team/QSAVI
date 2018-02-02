@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ArduinoInterface.cs" />
     <Compile Include="Assets\Scripts\fingerRotation.cs" />
+    <Compile Include="Assets\Scripts\Rotate_Finger.cs" />
     <Compile Include="Assets\Scripts\Rotate_Palm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

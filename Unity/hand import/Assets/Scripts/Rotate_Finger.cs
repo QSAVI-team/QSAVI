@@ -5,8 +5,8 @@ using System.IO.Ports;
 
 
 
-public class Rotate_Finger : MonoBehaviour
-{   // ------------------------- SERIAL PORT -------------------------
+public class Rotate_Finger : MonoBehaviour{   
+    // ------------------------- SERIAL PORT -------------------------
 
     //SerialPort sp = new SerialPort(portName,baudRate); // fill in com port
     SerialPort serialPort;
@@ -31,7 +31,8 @@ public class Rotate_Finger : MonoBehaviour
     // ------------------------- START -------------------------
 
     // Use this for initialization
-    void Start()   {
+    void Start()
+    {
         StartCoroutine("ProcessRotation");
     }
 
@@ -50,27 +51,29 @@ public class Rotate_Finger : MonoBehaviour
         string[] vec3 = currentArduinoDataPacket.Split(',');
 
         // Check that there are all 4 parts
-        if (vec3.Length < 8)  {
+        if (vec3.Length < 8)
+        {
             isValidData = false;
         }
 
         // If the data is valid, process it
-        if (isValidData)  {
+        if (isValidData)
+        {
 
             float potval = float.Parse(vec3[pin]);
 
 
-                if (vec3[4] != "" && vec3[5] != "" && vec3[6] != "" && vec3[7] != "" ) //check that no values are blank
-                {
-                    float fingerRotation = ((potval / potMax)(range)) + min; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
-                    transform.eulerAngles = new Vector3(0, fingerRotation, 0);
-                }
-
-                // figure out how to make fingerRotation to actually move the finger
+            if (vec3[4] != "" && vec3[5] != "" && vec3[6] != "" && vec3[7] != "") //check that no values are blank
+            {
+                float fingerRotation = ((potval / potMax)(range)) + min; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
+                transform.eulerAngles = new Vector3(0, fingerRotation, 0);
             }
 
-            StartCoroutine("ProcessFingerRotation");
+            // figure out how to make fingerRotation to actually move the finger
         }
+
+        StartCoroutine("ProcessFingerRotation");
     }
+}
 }
 
