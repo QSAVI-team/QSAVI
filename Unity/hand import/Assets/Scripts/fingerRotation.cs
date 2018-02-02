@@ -20,76 +20,82 @@ public class Rotate_Finger : MonoBehaviour
     public int potMax = 676;
     public int baudRate = 0;
     public string portName = "";
-   
 
-  // Use this for initialization
+
+    // Use this for initialization
 
     float range = max - min;
-    // Setup timing
-    serialPortRefreshPeriod = Constants.SERIAL_PORT_REFRESH_PERIOD;
-    serialPortRequestDelayPeriod = Constants.SERIAL_PORT_REQUEST_DELAY_PERIOD;
 
-    // Setup COM port
-    string comPortName = Constants.COM_PORT;
-    serialPort = new SerialPort(comPortName, Constants.COM_BAUD);
-    serialPort.Open();
 
-    // Start getting data
-    if (serialPort.IsOpen)
+    // ------------------------- START -------------------------
+
+    // horizontal hand position, want to update later to being down
+    // Use this for initialization
+    void Start()
     {
-        StartCoroutine("getSerialData");
-        Debug.Log("Opened " + comPortName);
+        StartCoroutine("ProcessRotation");
     }
-    else
-    {
-        Debug.LogError("Unable to open " + comPortName);
-    }
-    
-    
-		// Setup timing
-		serialPortRefreshPeriod = Constants.SERIAL_PORT_REFRESH_PERIOD;
-		serialPortRequestDelayPeriod = Constants.SERIAL_PORT_REQUEST_DELAY_PERIOD;
 
-		// Setup COM port
-		string comPortName = Constants.COM_PORT;
-		serialPort = new SerialPort (comPortName, Constants.COM_BAUD);
-		serialPort.Open ();
+    // ------------------------- GET SERIAL PORT DATA -------------------------
 
-		// Start getting data
-		if (serialPort.IsOpen) {
-			StartCoroutine ("getSerialData");
-			Debug.Log ("Opened " + comPortName);
-		} else {
-			Debug.LogError ("Unable to open " + comPortName);
-		}
-
-
-    IEnumerator getSerialData()
+    IEnumerator ProcessFingerRotation()
     {
 
-        yield return new WaitForSeconds(serialPortRefreshPeriod);
+        yield return new WaitForSeconds(ArduinoInterface.SERIAL_PORT_REFRESH_PERIOD);
 
-        if (serialPort != null)
+        // Assume data will be valid
+        bool isValidData = true;
+
+        // Get the data
+        string currentArduinoDataPacket = ArduinoInterface.currentArduinoDataPacket;
+        // Split the line at each comma (this is how the code currently formats the output)
+        string[] vec3 = currentArduinoDataPacket.Split(',');
+
+        // Check that there are all 4 parts
+        if (vec3.Length < 4)
         {
-            // Request data
-            Debug.Log("Requesting data...");
-            serialPort.Write("1");
-            yield return new WaitForSeconds(serialPortRequestDelayPeriod);
+            isValidData = false;
+        }
 
-            // Assume data will be valid
-            bool isValidData = true;
+        // If the data is valid, process it
+        if (isValidData)
+        {
 
-            string line = sp.ReadLine();//Read line output from arduino code
-                                        //Debug.Log(line);
-            string[] vec3 = line.Split(',');//split the line at each tab (this is how the code currently formats the output)
+            float w = float.Parse(vec3[0]) * (negativeW ? -1f : 1f);
+            float x = float.Parse(vec3[1]) * (negativeX ? -1f : 1f);
+            float y = float.Parse(vec3[2]) * (negativeY ? -1f : 1f);
+            float z = float.Parse(vec3[3]) * (negativeZ ? -1f : 1f);
 
 
-            if (vec3[0] != "" && vec3[1] != "" && vec3[2] != "" && vec3[3] != "" && vec3[4] != "") //check that no values are blank
+            yield return new WaitForSeconds(serialPortRefreshPeriod);
+
+            if (serialPort != null)
             {
-                float potVal = vec3[4]; // set the fourth element of vec3 to 
-                float fingerRotation = ((potval / potMax)(range)) + min; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
-                transform.eulerAngles = new Vector3(0, fingerRotation, 0);
+                // Request data
+                Debug.Log("Requesting data...");
+                serialPort.Write("1");
+                yield return new WaitForSeconds(serialPortRequestDelayPeriod);
+
+                // Assume data will be valid
+                bool isValidData = true;
+
+                string line = sp.ReadLine();//Read line output from arduino code
+                                            //Debug.Log(line);
+                string[] vec3 = line.Split(',');//split the line at each tab (this is how the code currently formats the output)
+
+
+                if (vec3[0] != "" && vec3[1] != "" && vec3[2] != "" && vec3[3] != "" && vec3[4] != "") //check that no values are blank
+                {
+                    float potVal = vec3[4]; // set the fourth element of vec3 to 
+                    float fingerRotation = ((potval / potMax)(range)) + min; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
+                    transform.eulerAngles = new Vector3(0, fingerRotation, 0);
+                }
+
+                // figure out how to make fingerRotation to actually move the finger
             }
 
-            // figure out how to make fingerRotation to actually move the finger
+            StartCoroutine("ProcessFingerRotation");
+        }
+    }
 }
+
