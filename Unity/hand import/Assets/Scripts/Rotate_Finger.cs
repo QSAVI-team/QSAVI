@@ -14,25 +14,20 @@ public class Rotate_Finger : MonoBehaviour{
 
     //float serialPortRefreshPeriod;
     //float serialPortRequestDelayPeriod;
-    public float fmin = 0f;
-    public float fmax = 0f;
+    public float fingMin = 0f;
+    public float fingMax = 0f;
     public int potMin = 0;
     public int potMax = 676;
     public int baudRate = 0;
     public string portName = "";
-    public int pin = 0;
-
-
-    // Use this for initialization
-
-    float Range = fmax - fmin;
-
+    public int Datapacket = 0;
+    
+    
 
     // ------------------------- START -------------------------
 
     // Use this for initialization
-    void Start()
-    {
+    void Start()    {
         StartCoroutine("ProcessRotation");
     }
 
@@ -51,29 +46,21 @@ public class Rotate_Finger : MonoBehaviour{
         string[] vec3 = currentArduinoDataPacket.Split(',');
 
         // Check that there are all 4 parts
-        if (vec3.Length < 8)
-        {
+        if (vec3.Length < 8)     {
             isValidData = false;
         }
 
         // If the data is valid, process it
-        if (isValidData)
-        {
+            if (isValidData)  {
 
-            float potval = float.Parse(vec3[pin]);
-
-
-            if (vec3[4] != "" && vec3[5] != "" && vec3[6] != "" && vec3[7] != "") //check that no values are blank
-            {
-                float fingerRotation = ((potval / potMax)(range)) + min; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
-                transform.eulerAngles = new Vector3(0, fingerRotation, 0);
-            }
-
-            // figure out how to make fingerRotation to actually move the finger
+            float potval = float.Parse(vec3[Datapacket]);
+            float fingerRotation = ((potval-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
+            transform.eulerAngles = new Vector3(0, fingerRotation, 0);
+                // figure out how to make fingerRotation to actually move the finger
         }
 
         StartCoroutine("ProcessFingerRotation");
     }
 }
-}
+
 
