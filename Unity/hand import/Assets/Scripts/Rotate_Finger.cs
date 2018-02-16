@@ -21,8 +21,8 @@ public class Rotate_Finger : MonoBehaviour{
     public int baudRate = 0;
     public string portName = "";
     public int Datapacket = 0;
+    public int potval = 0;  // only to use for testing
     
-    // blah balh
 
     // ------------------------- START -------------------------
 
@@ -53,7 +53,7 @@ public class Rotate_Finger : MonoBehaviour{
         // If the data is valid, process it
             if (isValidData)  {
 
-            float potval = float.Parse(vec3[Datapacket]);
+            //float potval = float.Parse(vec3[Datapacket]);
             float fingerRotation = ((potval-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
             transform.eulerAngles = new Vector3(0, fingerRotation, 0);
                 // figure out how to make fingerRotation to actually move the finger

@@ -74,9 +74,22 @@ public class Rotate_Palm : MonoBehaviour {
 			float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
 			float y = float.Parse (vec3 [2]) * (negativeY ? -1f : 1f);
 			float z = float.Parse (vec3 [3]) * (negativeZ ? -1f : 1f);
+            /*
+            ////// new Quaternion matrix/////
+            float w = float.Parse(vec3[0]);
+            float x = float.Parse(vec3[1]);
+            float y = float.Parse(vec3[2]);
+            float z = float.Parse(vec3[3]);
+            double theta = Math.Acos(w) * 2;
 
-			// Construct input quaternion from read data
-			Quaternion inputQuaternion = Quaternion.identity;
+            // quaternion rotation matrix multiply quaternion by this matrix to get out new oriented quaternion 
+            float[,] R = new float[,]{ { 2*((float)theta* (float)theta + x*x)-1,2*(x*y-w*z), 2*(x*x+w*y) },   
+                                  {2*(x*y+w*z) ,2*(w*w+y*y)-1 , 2*(y*z-w*x)},
+                                {2*(x*y-w*y), 2*(y*z+w*x) ,2*(w*w +z*z)} };
+
+            */////////////////////////////////////////
+            // Construct input quaternion from read data
+            Quaternion inputQuaternion = Quaternion.identity;
 
 			if(orientaionMode == OrientationMode.X_Y_Z) {
 				inputQuaternion = new Quaternion (x, y, z, w);

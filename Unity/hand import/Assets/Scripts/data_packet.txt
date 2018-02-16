@@ -1,1 +1,1 @@
-cali,wPalm,xPalm,yPalm,zPalm,wElbow,xElbow,yElbow,zElbow,thumbCurl,thumbLateral,indBase,indknuckle,midBase,midknuckle,
+cali,wPalm,xPalm,yPalm,zPalm,indBase,indknuckle, thumbCurl,thumbLateral,midBase,midknuckle,

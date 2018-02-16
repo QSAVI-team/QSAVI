@@ -1025,6 +1025,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 932105922}
+  - component: {fileID: 932105923}
   m_Layer: 0
   m_Name: finger_index_01_R
   m_TagString: Untagged
@@ -1046,6 +1047,25 @@ Transform:
   m_Father: {fileID: 1802896171}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &932105923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 932105921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fingMin: 0
+  fingMax: 0
+  potMin: 0
+  potMax: 676
+  baudRate: 0
+  portName: 
+  Datapacket: 0
+  potval: 0
 --- !u!1 &935172916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,7 +1849,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1527000052}
-  - component: {fileID: 1527000053}
   m_Layer: 0
   m_Name: hand_R
   m_TagString: Untagged
@@ -1854,28 +1873,6 @@ Transform:
   m_Father: {fileID: 448601749}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1527000053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1527000051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35670fd51acf028459827ed596941524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientaionMode: 1
-  negativeX: 0
-  negativeY: 0
-  negativeZ: 0
-  negativeW: 0
-  invertX: 0
-  invertY: 0
-  invertZ: 0
-  offsetRotaion: {x: -90, y: 0, z: 0}
-  additionalRotaion: {x: 0, y: 0, z: 0}
-  setSenterRotationNow: 0
 --- !u!1 &1535076095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,6 +2403,7 @@ MonoBehaviour:
   baudRate: 0
   portName: 
   Datapacket: 5
+  potval: 0
 --- !u!1 &1890485060
 GameObject:
   m_ObjectHideFlags: 0

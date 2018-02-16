@@ -22,10 +22,18 @@ public class ArduinoInterface : MonoBehaviour {
 
 	public static float SERIAL_PORT_REFRESH_PERIOD;
 	public static float SERIAL_PORT_REQUEST_DELAY_PERIOD;
+    bool calibration = 0;
+    float wpalm = 0;
+    float xpalm = 0;
+    float ypalm = 0;
+    float zpalm = 0;
+    float indexbasePOT = 0;
+    float indexkucklePOT = 0;
+    float thumbCurlPOT = 0;
+    float thumbLateralPOT = 0;
+    // ------------------------- SERIAL PORT -------------------------
 
-	// ------------------------- SERIAL PORT -------------------------
-
-	private SerialPort serialPort;
+    private SerialPort serialPort;
 
 	// ------------------------- DATA -------------------------
 
@@ -76,14 +84,26 @@ public class ArduinoInterface : MonoBehaviour {
 			Debug.Log ("Requesting data...");
 			serialPort.Write ("1");
 			yield return new WaitForSeconds (SERIAL_PORT_REQUEST_DELAY_PERIOD);
+          
+            // Read the current data packet
+            currentArduinoDataPacket = serialPort.ReadLine ();
+            string[] DataPacket = currentArduinoDataPacket.Split(',');
+            // Separate DataPAcket into variables
+            calibration = bool.Parse(DataPacket[0]);
+            wpalm =float.Parse(DataPacket[1]);
+            xpalm = float.Parse(DataPacket[2]); 
+            ypalm = float.Parse(DataPacket[3]); 
+            zpalm = float.Parse(DataPacket[4]); 
+            indexbasePOT = float.Parse(DataPacket[5]); 
+            indexkucklePOT = float.Parse(DataPacket[6]) ;
+            thumbCurlPOT = float.Parse(DataPacket[7]); 
+            thumbLateralPOT = float.Parse(DataPacket[8]) ;
 
-			// Read the current data packet
-			currentArduinoDataPacket = serialPort.ReadLine ();
+            // Continue to get more data
+            StartCoroutine ("getSerialData");
+            
 
-			// Continue to get more data
-			StartCoroutine ("getSerialData");
-
-		}
+        }
 
 	}
 
