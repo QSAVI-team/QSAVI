@@ -25,10 +25,10 @@ public class Rotate_Palm : MonoBehaviour {
 	public bool invertY = false;
 	public bool invertZ = false;
 
-	public Vector3 offsetRotaion = new Vector3(90f, 0f, 90f);
+	public Vector3 offsetRotation = new Vector3(90f, 0f, 90f);
 	public Vector3 additionalRotaion = new Vector3(0f, 0f, 0f);
 	Quaternion centerQuaternion = Quaternion.identity;
-	public bool setSenterRotationNow = false;
+	public bool setCenterRotationNow = false;
 
 	float[] caliRotation = { 0, 0, 0 };
 
@@ -70,7 +70,7 @@ public class Rotate_Palm : MonoBehaviour {
 		// If the data is valid, process it
 		if (isValidData) {
 
-			float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f);
+			float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f); // want to use ArduinoInterface.wpalm    but its giving me a protection error such that it cant call variable from arduino interface
 			float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
 			float y = float.Parse (vec3 [2]) * (negativeY ? -1f : 1f);
 			float z = float.Parse (vec3 [3]) * (negativeZ ? -1f : 1f);
@@ -115,18 +115,18 @@ public class Rotate_Palm : MonoBehaviour {
 			Quaternion resultQuaternion = Quaternion.Euler (resultAngles);
 			*/
 
-			if (setSenterRotationNow) {
-				setSenterRotationNow = false;
+			if (setCenterRotationNow) {
+				setCenterRotationNow = false;
 				centerQuaternion = inputQuaternion;
 				centerQuaternion = Quaternion.Inverse (centerQuaternion);
 			}
 
-			Quaternion offsetQuaternion = Quaternion.Euler (offsetRotaion);
+			Quaternion offsetQuaternion = Quaternion.Euler (offsetRotation);
 			//inputQuaternion = inputQuaternion * offsetQuaternion;
 
 			// Set the final orientaion
 			transform.localRotation = inputQuaternion * centerQuaternion;
-			transform.Rotate (offsetRotaion, Space.Self);
+			transform.Rotate (offsetRotation, Space.Self);
 
 			/*
 			transform.RotateAround (transform.right, Mathf.Deg2Rad * additionalRotaion.x);

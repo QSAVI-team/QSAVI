@@ -22,7 +22,7 @@ public class ArduinoInterface : MonoBehaviour {
 
 	public static float SERIAL_PORT_REFRESH_PERIOD;
 	public static float SERIAL_PORT_REQUEST_DELAY_PERIOD;
-    bool calibration = 0;
+    int calibration = 0;
     float wpalm = 0;
     float xpalm = 0;
     float ypalm = 0;
@@ -89,8 +89,8 @@ public class ArduinoInterface : MonoBehaviour {
             currentArduinoDataPacket = serialPort.ReadLine ();
             string[] DataPacket = currentArduinoDataPacket.Split(',');
             // Separate DataPAcket into variables
-            calibration = bool.Parse(DataPacket[0]);
-            wpalm =float.Parse(DataPacket[1]);
+            calibration = int.Parse(DataPacket[0]);
+            wpalm = float.Parse(DataPacket[1]);
             xpalm = float.Parse(DataPacket[2]); 
             ypalm = float.Parse(DataPacket[3]); 
             zpalm = float.Parse(DataPacket[4]); 
