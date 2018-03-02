@@ -25,6 +25,8 @@ public class Rotate_Palm : MonoBehaviour {
 	public bool invertY = false;
 	public bool invertZ = false;
 
+	public Space rotationSpace = Space.Self;
+
 	public Vector3 offsetRotation = new Vector3(90f, 0f, 90f);
 	public Vector3 additionalRotaion = new Vector3(0f, 0f, 0f);
 	Quaternion centerQuaternion = Quaternion.identity;
@@ -126,7 +128,7 @@ public class Rotate_Palm : MonoBehaviour {
 
 			// Set the final orientaion
 			transform.localRotation = inputQuaternion * centerQuaternion;
-			transform.Rotate (offsetRotation, Space.Self);
+			transform.Rotate (offsetRotation, rotationSpace);
 
 			/*
 			transform.RotateAround (transform.right, Mathf.Deg2Rad * additionalRotaion.x);

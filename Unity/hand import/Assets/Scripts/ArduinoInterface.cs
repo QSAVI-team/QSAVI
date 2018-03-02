@@ -88,6 +88,9 @@ public class ArduinoInterface : MonoBehaviour {
             // Read the current data packet
             currentArduinoDataPacket = serialPort.ReadLine ();
             string[] DataPacket = currentArduinoDataPacket.Split(',');
+
+			//Debug.Log ("Data: " + currentArduinoDataPacket);
+
             // Separate DataPAcket into variables
             calibration = int.Parse(DataPacket[0]);
             wpalm = float.Parse(DataPacket[1]);

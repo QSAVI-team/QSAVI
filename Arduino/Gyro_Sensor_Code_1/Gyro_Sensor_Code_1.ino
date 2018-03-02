@@ -78,12 +78,14 @@ MPU6050 mpu;
    http://code.google.com/p/arduino/issues/detail?id=958
    ========================================================================= */
 
-
+// uncomment "OUTPUT_QSAVI_GLOVE" for the output to Unity
+// Data Packet format is: cali,wPalm,xPalm,yPalm,zPalm,indBase,indknuckle, thumbCurl,thumbLateral,midBase,midknuckle
+#define OUTPUT_QSAVI_GLOVE
 
 // uncomment "OUTPUT_READABLE_QUATERNION" if you want to see the actual
 // quaternion components in a [w, x, y, z] format (not best for parsing
 // on a remote host such as Processing or something though)
-#define OUTPUT_READABLE_QUATERNION
+//#define OUTPUT_READABLE_QUATERNION
 
 // uncomment "OUTPUT_READABLE_EULER" if you want to see Euler angles
 // (in degrees) calculated from the quaternions coming from the FIFO.
@@ -300,6 +302,32 @@ void loop() {
     fifoCount -= packetSize;
 
     //Serial.println("Get new data!");
+
+#ifdef OUTPUT_QSAVI_GLOVE
+
+#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+    // Wait for request (any 1 byte)
+    while (Serial.available() > 0) {
+      if (Serial.read() > 0) {
+#endif
+
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        Serial.print("0,");
+        Serial.print(q.w);
+        Serial.print(",");
+        Serial.print(q.x);
+        Serial.print(",");
+        Serial.print(q.y);
+        Serial.print(",");
+        Serial.print(q.z);
+        Serial.println(",0,0,0,0");
+
+#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+      }
+    }
+#endif
+
+#endif
 
 #ifdef OUTPUT_READABLE_QUATERNION
 
