@@ -2,9 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Rotate_Palm.cs">
     <Files>
-      <File FileName="Assets\Scripts\Rotate_Palm.cs" Line="131" Column="51" />
-      <File FileName="Assets\Scripts\ArduinoInterface.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Rotation_Test.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Rotate_Palm.cs" Line="55" Column="81" />
+      <File FileName="Assets\Scripts\ArduinoInterface.cs" Line="39" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -54,104 +54,87 @@ public class Rotate_Palm : MonoBehaviour {
 
 		yield return new WaitForSeconds (ArduinoInterface.SERIAL_PORT_REFRESH_PERIOD);
 
-		// Assume data will be valid
-		bool isValidData = true;
+        float w = ArduinoInterface.wpalm;
+        float x = ArduinoInterface.xpalm;
+        float y = ArduinoInterface.ypalm;
+        float z = ArduinoInterface.zpalm;
+        /*
+		float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f);
+        float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
+		float y = float.Parse (vec3 [2]) * (negativeY ? -1f : 1f);
+		float z = float.Parse (vec3 [3]) * (negativeZ ? -1f : 1f);
+        
+        ////// new Quaternion matrix/////
+       
+        double theta = Math.Acos(w) * 2;
 
-		// Get the data
-		string currentArduinoDataPacket = ArduinoInterface.currentArduinoDataPacket;
-		// Split the line at each comma (this is how the code currently formats the output)
-		string[] vec3 = currentArduinoDataPacket.Split (',');
+        // quaternion rotation matrix multiply quaternion by this matrix to get out new oriented quaternion 
+        float[,] R = new float[,]{ { 2*((float)theta* (float)theta + x*x)-1,2*(x*y-w*z), 2*(x*x+w*y) },   
+                              {2*(x*y+w*z) ,2*(w*w+y*y)-1 , 2*(y*z-w*x)},
+                            {2*(x*y-w*y), 2*(y*z+w*x) ,2*(w*w +z*z)} };
 
-		// Check that there are all 4 parts
-		if (vec3.Length < 4) {
-			isValidData = false;
+        */////////////////////////////////////////
+        // Construct input quaternion from read data
+        Quaternion inputQuaternion = Quaternion.identity;
+
+		if(orientaionMode == OrientationMode.X_Y_Z) {
+			inputQuaternion = new Quaternion (x, y, z, w);
+		} else if(orientaionMode == OrientationMode.X_Z_Y) {
+			inputQuaternion = new Quaternion (x, z, y, w);
+		} else if(orientaionMode == OrientationMode.Y_X_Z) {
+			inputQuaternion = new Quaternion (y, x, z, w);
+		} else if(orientaionMode == OrientationMode.Y_Z_X) {
+			inputQuaternion = new Quaternion (y, z, x, w);
+		} else if(orientaionMode == OrientationMode.Z_X_Y) {
+			inputQuaternion = new Quaternion (z, x, y, w);
+		} else if(orientaionMode == OrientationMode.Z_Y_X) {
+			inputQuaternion = new Quaternion (z, y, x, w);
 		}
 
-		// If the data is valid, process it
-		if (isValidData) {
-            float w = ArduinoInterface.wpalm;
-            float x = ArduinoInterface.xpalm;
-            float y = ArduinoInterface.ypalm;
-            float z = ArduinoInterface.zpalm;
-            /*
-			float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f);
-            float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
-			float y = float.Parse (vec3 [2]) * (negativeY ? -1f : 1f);
-			float z = float.Parse (vec3 [3]) * (negativeZ ? -1f : 1f);
-            
-            ////// new Quaternion matrix/////
-           
-            double theta = Math.Acos(w) * 2;
+		// TODO: flip the axis of the rotaion to match the sensor
+		/*
+		// Convert to euler angles and flip axis
+		Vector3 inputAngles = inputQuaternion.eulerAngles;
+		Vector3 resultAngles = new Vector3 (inputAngles.y, inputAngles.z, inputAngles.x);
 
-            // quaternion rotation matrix multiply quaternion by this matrix to get out new oriented quaternion 
-            float[,] R = new float[,]{ { 2*((float)theta* (float)theta + x*x)-1,2*(x*y-w*z), 2*(x*x+w*y) },   
-                                  {2*(x*y+w*z) ,2*(w*w+y*y)-1 , 2*(y*z-w*x)},
-                                {2*(x*y-w*y), 2*(y*z+w*x) ,2*(w*w +z*z)} };
+		// Construct resultant quaternion
+		Quaternion resultQuaternion = Quaternion.Euler (resultAngles);
+		*/
 
-            */////////////////////////////////////////
-            // Construct input quaternion from read data
-            Quaternion inputQuaternion = Quaternion.identity;
-
-			if(orientaionMode == OrientationMode.X_Y_Z) {
-				inputQuaternion = new Quaternion (x, y, z, w);
-			} else if(orientaionMode == OrientationMode.X_Z_Y) {
-				inputQuaternion = new Quaternion (x, z, y, w);
-			} else if(orientaionMode == OrientationMode.Y_X_Z) {
-				inputQuaternion = new Quaternion (y, x, z, w);
-			} else if(orientaionMode == OrientationMode.Y_Z_X) {
-				inputQuaternion = new Quaternion (y, z, x, w);
-			} else if(orientaionMode == OrientationMode.Z_X_Y) {
-				inputQuaternion = new Quaternion (z, x, y, w);
-			} else if(orientaionMode == OrientationMode.Z_Y_X) {
-				inputQuaternion = new Quaternion (z, y, x, w);
-			}
-
-			// TODO: flip the axis of the rotaion to match the sensor
-			/*
-			// Convert to euler angles and flip axis
-			Vector3 inputAngles = inputQuaternion.eulerAngles;
-			Vector3 resultAngles = new Vector3 (inputAngles.y, inputAngles.z, inputAngles.x);
-
-			// Construct resultant quaternion
-			Quaternion resultQuaternion = Quaternion.Euler (resultAngles);
-			*/
-
-			if (setCenterRotationNow) {
-				setCenterRotationNow = false;
-				centerQuaternion = inputQuaternion;
-				centerQuaternion = Quaternion.Inverse (centerQuaternion);
-			}
-
-			Quaternion offsetQuaternion = Quaternion.Euler (offsetRotation);
-			//inputQuaternion = inputQuaternion * offsetQuaternion;
-
-			// Set the final orientaion
-			transform.localRotation = inputQuaternion * centerQuaternion;
-			transform.Rotate (offsetRotation, rotationSpace);
-
-			/*
-			transform.RotateAround (transform.right, Mathf.Deg2Rad * additionalRotaion.x);
-			transform.RotateAround (transform.up, Mathf.Deg2Rad * additionalRotaion.y);
-			transform.RotateAround (transform.forward, Mathf.Deg2Rad * additionalRotaion.z);
-			*/
-
-			Vector3 currentEulerAngles = transform.localEulerAngles;
-			//Vector3 currentEulerAngles = transform.InverseTransformDirection(inputQuaternion.eulerAngles);
-			if (invertX) {
-				currentEulerAngles.x = -currentEulerAngles.x;
-				//transform.RotateAround (transform.right, Mathf.PI);
-			}
-			if (invertY) {
-				currentEulerAngles.y = -currentEulerAngles.y;
-				//transform.RotateAround (transform.up, Mathf.PI);
-			}
-			if (invertZ) {
-				currentEulerAngles.z = -currentEulerAngles.z;
-				//transform.RotateAround (transform.forward, Mathf.PI);
-			}
-			transform.localEulerAngles = currentEulerAngles;
-
+		if (setCenterRotationNow) {
+			setCenterRotationNow = false;
+			centerQuaternion = inputQuaternion;
+			centerQuaternion = Quaternion.Inverse (centerQuaternion);
 		}
+
+		Quaternion offsetQuaternion = Quaternion.Euler (offsetRotation);
+		//inputQuaternion = inputQuaternion * offsetQuaternion;
+
+		// Set the final orientaion
+		transform.localRotation = inputQuaternion * centerQuaternion;
+		transform.Rotate (offsetRotation, rotationSpace);
+
+		/*
+		transform.RotateAround (transform.right, Mathf.Deg2Rad * additionalRotaion.x);
+		transform.RotateAround (transform.up, Mathf.Deg2Rad * additionalRotaion.y);
+		transform.RotateAround (transform.forward, Mathf.Deg2Rad * additionalRotaion.z);
+		*/
+
+		Vector3 currentEulerAngles = transform.localEulerAngles;
+		//Vector3 currentEulerAngles = transform.InverseTransformDirection(inputQuaternion.eulerAngles);
+		if (invertX) {
+			currentEulerAngles.x = -currentEulerAngles.x;
+			//transform.RotateAround (transform.right, Mathf.PI);
+		}
+		if (invertY) {
+			currentEulerAngles.y = -currentEulerAngles.y;
+			//transform.RotateAround (transform.up, Mathf.PI);
+		}
+		if (invertZ) {
+			currentEulerAngles.z = -currentEulerAngles.z;
+			//transform.RotateAround (transform.forward, Mathf.PI);
+		}
+		transform.localEulerAngles = currentEulerAngles;
 
 		/*
 		if (vec3 [0] != "" && vec3 [1] != "" && vec3 [2] != "" && vec3 [3] != "") { //check that no values are blank

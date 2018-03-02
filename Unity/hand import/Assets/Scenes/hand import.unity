@@ -1503,7 +1503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1300009985
 Animator:
   serializedVersion: 3
@@ -1579,7 +1579,7 @@ GameObject:
   - component: {fileID: 1361439854}
   - component: {fileID: 1361439853}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Test Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1617,6 +1617,7 @@ MonoBehaviour:
   invertX: 0
   invertY: 0
   invertZ: 0
+  rotationSpace: 1
   offsetRotation: {x: 90, y: 0, z: 90}
   additionalRotaion: {x: 0, y: 0, z: 0}
   setCenterRotationNow: 0
@@ -2162,7 +2163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec8de2bbb6fda041a010525c980e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setCOMPort: COM9
+  setCOMPort: COM3
   setCOMBaud: 115200
   setSerialPortRefreshPeriod: 0.01
   setSerialPortRequestDelayPeriod: 0.0005
@@ -2382,6 +2383,7 @@ MonoBehaviour:
   invertX: 0
   invertY: 0
   invertZ: 0
+  rotationSpace: 1
   offsetRotation: {x: 90, y: 0, z: 90}
   additionalRotaion: {x: 0, y: 0, z: 0}
   setCenterRotationNow: 0
@@ -2418,7 +2420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1890485061
 Transform:
   m_ObjectHideFlags: 0

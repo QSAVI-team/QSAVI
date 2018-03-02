@@ -54,7 +54,6 @@
      <Compile Include="Assets\Scripts\ArduinoInterface.cs" />
      <Compile Include="Assets\Scripts\Rotate_Finger.cs" />
      <Compile Include="Assets\Scripts\Rotate_Palm.cs" />
-     <Compile Include="Assets\Scripts\Rotation_Test.cs" />
      <None Include="Assets\Scripts\data_packet.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
