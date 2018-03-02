@@ -1,3 +1,4 @@
+
 // 6/21/2012 by Jeff Rowberg <jeff@rowberg.net>
 // Updates should (hopefully) always be available at https://github.com/jrowberg/i2cdevlib
 //
@@ -276,6 +277,9 @@ void loop() {
     // .
   }
 
+
+    // Button Condition Variable
+    int buttonState = 0;
   // reset interrupt flag and get INT_STATUS byte
   mpuInterrupt = false;
   mpuIntStatus = mpu.getIntStatus();
@@ -335,8 +339,18 @@ void loop() {
     // Wait for request (any 1 byte)
     while (Serial.available() > 0) {
       if (Serial.read() > 0) {
-#endif
-
+      #endif
+      
+    // Setup the buttonState to read the status of the button
+    buttonState = digitalRead(BUTTON_PIN);
+    // If using button, set if condition buttonstate to LOW
+    // If using touch sensor, use HIGH
+    if (buttonState == HIGH) // Condition if button is not pressed, LOW for button, HIGH for touch sensor
+    {Serial.print("1,");
+    }
+    else if (buttonState == LOW) // Condition if button is pressed, HIGH for button, LOW for touch sensor
+    {Serial.print("2,");
+    }
         // display quaternion values in easy matrix form: w, x, y, z
         mpu.dmpGetQuaternion(&q, fifoBuffer);
         //Serial.print("quat\t");
@@ -348,7 +362,7 @@ void loop() {
         Serial.print(",");
         Serial.println(q.z);
 
-#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+      #ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
       }
     }
 #endif
@@ -357,20 +371,19 @@ void loop() {
 
 #ifdef OUTPUT_READABLE_EULER
     // display Euler angles in degrees
-    mpu.dmpGetQuaternion(&q, fifoBuffer);
-    mpu.dmpGetEuler(euler, &q);
-    //            Serial.print("euler\t");
-    Serial.print(euler[0] * 180 / M_PI);
-    Serial.print(",");
-    Serial.print(euler[1] * 180 / M_PI);
-    Serial.print(",");
-    Serial.println(euler[2] * 180 / M_PI);
+
+      mpu.dmpGetQuaternion(&q, fifoBuffer);
+      mpu.dmpGetEuler(euler, &q);
+      //            Serial.print("euler\t");
+      Serial.print(euler[0] * 180 / M_PI);
+      Serial.print(",");
+      Serial.print(euler[1] * 180 / M_PI);
+      Serial.print(",");
+      Serial.println(euler[2] * 180 / M_PI);
 
 #endif
 
 
-    // Button Condition Variable
-    int buttonState = 0;
 
 #ifdef OUTPUT_READABLE_YAWPITCHROLL
     // Setup the buttonState to read the status of the button

@@ -22,8 +22,9 @@ public class Rotate_Finger : MonoBehaviour{
     public string portName = "";
     public int Datapacket = 0;
     public int potval = 0;  // only to use for testing
-    
 
+    float POTBASE=ArduinoInterface.indexbasePOT;
+    float POTKUCKLE = ArduinoInterface.indexkucklePOT;
     // ------------------------- START -------------------------
 
     // Use this for initialization

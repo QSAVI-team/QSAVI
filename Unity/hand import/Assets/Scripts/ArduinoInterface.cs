@@ -22,15 +22,15 @@ public class ArduinoInterface : MonoBehaviour {
 
 	public static float SERIAL_PORT_REFRESH_PERIOD;
 	public static float SERIAL_PORT_REQUEST_DELAY_PERIOD;
-    int calibration = 0;
-    float wpalm = 0;
-    float xpalm = 0;
-    float ypalm = 0;
-    float zpalm = 0;
-    float indexbasePOT = 0;
-    float indexkucklePOT = 0;
-    float thumbCurlPOT = 0;
-    float thumbLateralPOT = 0;
+    public static float calibration = 0;
+    public static float wpalm = 0;
+    public static float xpalm = 0;
+    public static float ypalm = 0;
+    public static float zpalm = 0;
+    public static float indexbasePOT = 0;
+    public static float indexkucklePOT = 0;
+    public static float thumbCurlPOT = 0;
+    public static float thumbLateralPOT = 0;
     // ------------------------- SERIAL PORT -------------------------
 
     private SerialPort serialPort;
@@ -92,7 +92,7 @@ public class ArduinoInterface : MonoBehaviour {
 			//Debug.Log ("Data: " + currentArduinoDataPacket);
 
             // Separate DataPAcket into variables
-            calibration = int.Parse(DataPacket[0]);
+            calibration = float.Parse(DataPacket[0]);
             wpalm = float.Parse(DataPacket[1]);
             xpalm = float.Parse(DataPacket[2]); 
             ypalm = float.Parse(DataPacket[3]); 
