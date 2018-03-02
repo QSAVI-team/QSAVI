@@ -30,12 +30,10 @@ public class Rotate_Palm : MonoBehaviour {
 	Quaternion centerQuaternion = Quaternion.identity;
 	public bool setCenterRotationNow = false;
 
-	float[] caliRotation = { 0, 0, 0 };
+
+    float[] caliRotation = { 0, 0, 0 };
 
 	// position pointing real hand down at your side
-	float x = 0;
-	float y = 0;
-	float z = 0;
 	float xo = 85.248f;
 	float yo = -52.267f;
 	float zo = -53.411f;
@@ -69,17 +67,18 @@ public class Rotate_Palm : MonoBehaviour {
 
 		// If the data is valid, process it
 		if (isValidData) {
-
-			float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f); // want to use ArduinoInterface.wpalm    but its giving me a protection error such that it cant call variable from arduino interface
-			float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
+            float w = ArduinoInterface.wpalm;
+            float x = ArduinoInterface.xpalm;
+            float y = ArduinoInterface.ypalm;
+            float z = ArduinoInterface.zpalm;
+            /*
+			float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f);
+            float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
 			float y = float.Parse (vec3 [2]) * (negativeY ? -1f : 1f);
 			float z = float.Parse (vec3 [3]) * (negativeZ ? -1f : 1f);
-            /*
+            
             ////// new Quaternion matrix/////
-            float w = float.Parse(vec3[0]);
-            float x = float.Parse(vec3[1]);
-            float y = float.Parse(vec3[2]);
-            float z = float.Parse(vec3[3]);
+           
             double theta = Math.Acos(w) * 2;
 
             // quaternion rotation matrix multiply quaternion by this matrix to get out new oriented quaternion 

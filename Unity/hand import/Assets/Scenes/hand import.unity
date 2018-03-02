@@ -1617,9 +1617,9 @@ MonoBehaviour:
   invertX: 0
   invertY: 0
   invertZ: 0
-  offsetRotaion: {x: 0, y: 0, z: 0}
+  offsetRotation: {x: 90, y: 0, z: 90}
   additionalRotaion: {x: 0, y: 0, z: 0}
-  setSenterRotationNow: 0
+  setCenterRotationNow: 0
 --- !u!23 &1361439854
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2162,7 +2162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec8de2bbb6fda041a010525c980e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setCOMPort: COM3
+  setCOMPort: COM9
   setCOMBaud: 115200
   setSerialPortRefreshPeriod: 0.01
   setSerialPortRequestDelayPeriod: 0.0005
@@ -2382,9 +2382,9 @@ MonoBehaviour:
   invertX: 0
   invertY: 0
   invertZ: 0
-  offsetRotaion: {x: 90, y: 0, z: 90}
+  offsetRotation: {x: 90, y: 0, z: 90}
   additionalRotaion: {x: 0, y: 0, z: 0}
-  setSenterRotationNow: 0
+  setCenterRotationNow: 0
 --- !u!114 &1858524833
 MonoBehaviour:
   m_ObjectHideFlags: 0
