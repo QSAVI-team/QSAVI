@@ -1065,7 +1065,7 @@ MonoBehaviour:
   baudRate: 0
   portName: 
   Datapacket: 0
-  potval: 0
+  potval: 14
 --- !u!1 &935172916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1300009985
 Animator:
   serializedVersion: 3
@@ -2414,13 +2414,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1890485061}
+  - component: {fileID: 1890485062}
   m_Layer: 0
   m_Name: Cube Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1890485061
 Transform:
   m_ObjectHideFlags: 0
@@ -2435,6 +2436,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1890485062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1890485060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35670fd51acf028459827ed596941524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientaionMode: 0
+  negativeX: 0
+  negativeY: 0
+  negativeZ: 0
+  negativeW: 0
+  invertX: 0
+  invertY: 0
+  invertZ: 0
+  rotationSpace: 1
+  offsetRotation: {x: 90, y: 0, z: 90}
+  additionalRotaion: {x: 0, y: 0, z: 0}
+  setCenterRotationNow: 0
 --- !u!1 &1899506811
 GameObject:
   m_ObjectHideFlags: 0

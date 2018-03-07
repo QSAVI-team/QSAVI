@@ -6,11 +6,7 @@ using System.IO.Ports;
 
 
 public class Rotate_Finger : MonoBehaviour{   
-    // ------------------------- SERIAL PORT -------------------------
-
-    //SerialPort sp = new SerialPort(portName,baudRate); // fill in com port
-    SerialPort serialPort;
-    // ------------------------- TIMING -------------------------
+   // ------------------------- TIMING -------------------------
 
     //float serialPortRefreshPeriod;
     //float serialPortRequestDelayPeriod;
@@ -29,23 +25,19 @@ public class Rotate_Finger : MonoBehaviour{
 
     // Use this for initialization
     void Start()    {
-        StartCoroutine("ProcessRotation");
+        StartCoroutine("ProcessFingerRotation");
     }
 
     // ------------------------- GET SERIAL PORT DATA -------------------------
-
+    
     IEnumerator ProcessFingerRotation()
     {
-        yield return new WaitForSeconds(ArduinoInterface.SERIAL_PORT_REFRESH_PERIOD);
-
+        //yield return new WaitForSeconds(ArduinoInterface.SERIAL_PORT_REFRESH_PERIOD);
+        yield return baudRate;  // only use for testing 
         // Assume data will be valid
         bool isValidData = true;
 
-        // Get the data
-        string currentArduinoDataPacket = ArduinoInterface.currentArduinoDataPacket;
-        // Split the line at each comma (this is how the code currently formats the output)
-        string[] vec3 = currentArduinoDataPacket.Split(',');
-
+     
         // Check that there are all 4 parts
         if (vec3.Length < 8)     {
             isValidData = false;
@@ -56,8 +48,8 @@ public class Rotate_Finger : MonoBehaviour{
 
             //float potval = float.Parse(vec3[Datapacket]);
             float fingerRotation = ((potval-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
-            transform.eulerAngles = new Vector3(0, fingerRotation, 0);
-                // figure out how to make fingerRotation to actually move the finger
+            transform.eulerAngles = new Vector3(0, potval, 0);// new Vector3(0, fingerRotation, 0);
+                                                                      // figure out how to make fingerRotation to actually move the finger
         }
 
         StartCoroutine("ProcessFingerRotation");
