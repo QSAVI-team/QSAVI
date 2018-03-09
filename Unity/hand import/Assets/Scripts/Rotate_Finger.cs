@@ -17,9 +17,11 @@ public class Rotate_Finger : MonoBehaviour{
     public int baudRate = 0;
     public string portName = "";
     public int Datapacket = 0;
-   // public int potval = 0;  // only to use for testing
 
- 
+    Quaternion Q = Quaternion.identity;
+    // public int potval = 0;  // only to use for testing
+
+
     // ------------------------- START -------------------------
 
     // Use this for initialization
@@ -43,14 +45,32 @@ public class Rotate_Finger : MonoBehaviour{
             float POTBASE = ArduinoInterface.indexbasePOT;
             float POTKUCKLE = ArduinoInterface.indexkucklePOT;
             float test = ArduinoInterface.xpalm;
+            Debug.Log("Pot data aquired");
             //float potval = float.Parse(vec3[Datapacket]);
-            float fingerRotation = ((test-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
-            transform.eulerAngles = new Vector3(0, potMax, 0);// new Vector3(0, fingerRotation, 0);
-                                                                      // figure out how to make fingerRotation to actually move the finger
-            }
+
+            transform.localRotation = Quaternion.Euler(0,100*test , 0);
+           // float fingerRotation = ((test-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
+           //transform.eulerAngles = new Vector3(x, y,z);// new Vector3(0, fingerRotation, 0);
+            //transform.Rotate(Vector3[90, potMax, 0]);
+                                                // figure out how to make fingerRotation to actually move the finger
+        }
 
         StartCoroutine("ProcessFingerRotation");
+    }
+
+    
+    // Update is called once per frame
+    void Update()
+    {
+
+        
+   
+        Debug.DrawRay(transform.position, 0.1f * transform.right, Color.red);
+        Debug.DrawRay(transform.position, 0.1f * transform.up, Color.green);
+        Debug.DrawRay(transform.position, 0.1f * transform.forward, Color.blue);
+
     }
 }
 
 
+    

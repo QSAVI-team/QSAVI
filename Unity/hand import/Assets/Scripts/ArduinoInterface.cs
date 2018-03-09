@@ -101,7 +101,7 @@ public class ArduinoInterface : MonoBehaviour {
             indexkucklePOT = float.Parse(DataPacket[6]) ;
             thumbCurlPOT = float.Parse(DataPacket[7]); 
             thumbLateralPOT = float.Parse(DataPacket[8]) ;
-
+            Debug.Log("Data Retrieved");
             // Continue to get more data
             StartCoroutine ("getSerialData");
             

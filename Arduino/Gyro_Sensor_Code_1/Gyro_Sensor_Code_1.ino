@@ -121,6 +121,7 @@ MPU6050 mpu;
 // This defines the calibrating button sensor. This sets the yaw/pitch/roll to 0/0/0
 // on the arduino if the button is pressed.
 #define BUTTON_PIN 3
+#define POTBASE 2
 
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
 bool blinkState = false;
@@ -133,6 +134,7 @@ uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
 uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffer
 
+
 // orientation/motion vars
 Quaternion q;           // [w, x, y, z]         quaternion container
 VectorInt16 aa;         // [x, y, z]            accel sensor measurements
@@ -141,7 +143,7 @@ VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measure
 VectorFloat gravity;    // [x, y, z]            gravity vector
 float euler[3];         // [psi, theta, phi]    Euler angle container
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
-
+int POT1;
 // packet structure for InvenSense teapot demo
 uint8_t teapotPacket[14] = { '$', 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x00, '\r', '\n' };
 
@@ -251,6 +253,7 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   // Configure button for input
   pinMode(BUTTON_PIN, INPUT);
+  pinMode(POTBASE,INPUT);
 }
 
 
@@ -314,8 +317,11 @@ void loop() {
     while (Serial.available() > 0) {
       if (Serial.read() > 0) {
 #endif
-
+        //POT1=analogRead(POTBASE);
         mpu.dmpGetQuaternion(&q, fifoBuffer);
+
+
+        
         Serial.print("0,");
         Serial.print(q.w);
         Serial.print(",");
@@ -324,7 +330,9 @@ void loop() {
         Serial.print(q.y);
         Serial.print(",");
         Serial.print(q.z);
-        Serial.println(",0,0,0,0");
+        Serial.print(",");
+        Serial.print(0);
+        Serial.println(",0,0,0");
 
 #ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
       }
