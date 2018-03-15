@@ -143,7 +143,14 @@ VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measure
 VectorFloat gravity;    // [x, y, z]            gravity vector
 float euler[3];         // [psi, theta, phi]    Euler angle container
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
-int POT1;
+float PotThumb1=0;
+float PotThumb2=0;
+float PotIndex1=0;
+float PotIndex2=0;
+// not enough room on uno
+float PotMid1=0;
+float PotMid2=0;
+
 // packet structure for InvenSense teapot demo
 uint8_t teapotPacket[14] = { '$', 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x00, '\r', '\n' };
 
@@ -254,6 +261,7 @@ void setup() {
   // Configure button for input
   pinMode(BUTTON_PIN, INPUT);
   pinMode(POTBASE,INPUT);
+  
 }
 
 
@@ -317,12 +325,22 @@ void loop() {
     while (Serial.available() > 0) {
       if (Serial.read() > 0) {
 #endif
-        //POT1=analogRead(POTBASE);
+
+        PotThumb1=analogRead(0);
+        
+        /*PotThumb2=analogRead(1);
+        PotIndex1=analogRead(2);
+        PotIndex1=analogRead(3);
+        // not enough room on uno
+        PotMid1=analogRead(4);
+        PotMid1=analogRead(5);
+        
+*/
         mpu.dmpGetQuaternion(&q, fifoBuffer);
 
 
         
-        Serial.print("0,");
+        Serial.print("0,"); // used for calibration
         Serial.print(q.w);
         Serial.print(",");
         Serial.print(q.x);
@@ -331,8 +349,25 @@ void loop() {
         Serial.print(",");
         Serial.print(q.z);
         Serial.print(",");
-        Serial.print(0);
-        Serial.println(",0,0,0");
+        
+        
+        Serial.print(PotThumb1);
+        Serial.print(",");
+        /*
+        Serial.print(PotThumb2);
+        Serial.print(",");
+        Serial.print(PotIndex1);
+        Serial.print(",");
+        Serial.print(PotIndex2);
+        
+        
+        /*
+        Serial.println(",");
+        Serial.print(PotMid1);
+        Serial.println(",");
+        Serial.print(PotMid2);
+*/
+        Serial.println("0,0,0"); // used during testing only 
 
 #ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
       }

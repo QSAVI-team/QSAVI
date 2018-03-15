@@ -14,11 +14,12 @@ public class Rotate_Finger : MonoBehaviour{
     public float fingMax = 0f;
     public int potMin = 0;
     public int potMax = 676;
-    public int baudRate = 0;
+    public int F = 0;
     public string portName = "";
     public int Datapacket = 0;
-
-    Quaternion Q = Quaternion.identity;
+    float POTBASE = 0;
+    float POTKNUCKLE=0;
+    
     // public int potval = 0;  // only to use for testing
 
 
@@ -42,17 +43,37 @@ public class Rotate_Finger : MonoBehaviour{
 
         // If the data is valid, process it
             if (isValidData)  {
-            float POTBASE = ArduinoInterface.indexbasePOT;
-            float POTKUCKLE = ArduinoInterface.indexkucklePOT;
-            float test = ArduinoInterface.xpalm;
-            Debug.Log("Pot data aquired");
-            //float potval = float.Parse(vec3[Datapacket]);
+            float POTBASE = ArduinoInterface.thumbCurlPOT;
+            /*   some reason it doesnt like when you define POTBASE inside the if statement (debug log will read but wont send to transform 
+            if (F == 0)
+            {
+                float POTBASE = ArduinoInterface.thumbCurlPOT;
+                float POTKNUCKLE = ArduinoInterface.thumbLateralPOT;
+                Debug.Log(POTBASE);
+            }
+            else if (F == 1)
+            {
+                float POTBASE = ArduinoInterface.indexbasePOT;
+                float POTKNUCKLE = ArduinoInterface.indexknucklePOT;
+            }
+            else if (F == 2)
+            {
+                float POTBASE = ArduinoInterface.midbasePOT;
+                float POTKNUCKLE = ArduinoInterface.midknucklePOT;
+            }
+               
+               */
+            
 
-            transform.localRotation = Quaternion.Euler(0,100*test , 0);
-           // float fingerRotation = ((test-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
-           //transform.eulerAngles = new Vector3(x, y,z);// new Vector3(0, fingerRotation, 0);
-            //transform.Rotate(Vector3[90, potMax, 0]);
-                                                // figure out how to make fingerRotation to actually move the finger
+            //Debug.Log("Pot data aquired");
+          
+
+            transform.localRotation = Quaternion.Euler(0,POTBASE*360/750 , 0);
+
+
+            // float fingerRotation = ((test-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
+            //transform.eulerAngles = new Vector3(x, y,z);// new Vector3(0, fingerRotation, 0);
+            
         }
 
         StartCoroutine("ProcessFingerRotation");
@@ -62,9 +83,6 @@ public class Rotate_Finger : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
-
-        
-   
         Debug.DrawRay(transform.position, 0.1f * transform.right, Color.red);
         Debug.DrawRay(transform.position, 0.1f * transform.up, Color.green);
         Debug.DrawRay(transform.position, 0.1f * transform.forward, Color.blue);

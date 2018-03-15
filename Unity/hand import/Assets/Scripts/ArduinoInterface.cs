@@ -28,9 +28,11 @@ public class ArduinoInterface : MonoBehaviour {
     public static float ypalm = 0;
     public static float zpalm = 0;
     public static float indexbasePOT = 0;
-    public static float indexkucklePOT = 0;
+    public static float indexknucklePOT = 0;
     public static float thumbCurlPOT = 0;
     public static float thumbLateralPOT = 0;
+    public static float midbasePOT = 0;
+    public static float midknucklePOT = 0;
     // ------------------------- SERIAL PORT -------------------------
 
     private SerialPort serialPort;
@@ -97,10 +99,13 @@ public class ArduinoInterface : MonoBehaviour {
             xpalm = float.Parse(DataPacket[2]); 
             ypalm = float.Parse(DataPacket[3]); 
             zpalm = float.Parse(DataPacket[4]); 
-            indexbasePOT = float.Parse(DataPacket[5]); 
-            indexkucklePOT = float.Parse(DataPacket[6]) ;
-            thumbCurlPOT = float.Parse(DataPacket[7]); 
-            thumbLateralPOT = float.Parse(DataPacket[8]) ;
+            thumbCurlPOT = float.Parse(DataPacket[5]); 
+            thumbLateralPOT = float.Parse(DataPacket[6]) ;
+            indexbasePOT = float.Parse(DataPacket[7]);
+            indexknucklePOT = float.Parse(DataPacket[8]);
+            //midbasePOT = float.Parse(DataPacket[9]);
+            //midkmucklePOT = float.Parse(DataPacket[10]);
+
             Debug.Log("Data Retrieved");
             // Continue to get more data
             StartCoroutine ("getSerialData");
