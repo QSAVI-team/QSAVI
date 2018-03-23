@@ -27,12 +27,11 @@ public class ArduinoInterface : MonoBehaviour {
     public static float xpalm = 0;
     public static float ypalm = 0;
     public static float zpalm = 0;
-    public static float indexbasePOT = 0;
-    public static float indexknucklePOT = 0;
-    public static float thumbCurlPOT = 0;
-    public static float thumbLateralPOT = 0;
-    public static float midbasePOT = 0;
-    public static float midknucklePOT = 0;
+    public static float index = 0;
+    public static float thumbcurl = 0;
+    public static float thumblateral = 0;
+    public static float mid = 0;
+ 
     // ------------------------- SERIAL PORT -------------------------
 
     private SerialPort serialPort;
@@ -86,25 +85,24 @@ public class ArduinoInterface : MonoBehaviour {
 			Debug.Log ("Requesting data...");
 			serialPort.Write ("1");
 			yield return new WaitForSeconds (SERIAL_PORT_REQUEST_DELAY_PERIOD);
-          
+            
             // Read the current data packet
             currentArduinoDataPacket = serialPort.ReadLine ();
             string[] DataPacket = currentArduinoDataPacket.Split(',');
 
-			//Debug.Log ("Data: " + currentArduinoDataPacket);
-
+            Debug.Log ("Data: " + currentArduinoDataPacket);
+            Debug.Log("Requesting data");
             // Separate DataPAcket into variables
             calibration = float.Parse(DataPacket[0]);
             wpalm = float.Parse(DataPacket[1]);
-            xpalm = float.Parse(DataPacket[2]); 
-            ypalm = float.Parse(DataPacket[3]); 
+            xpalm = float.Parse(DataPacket[2]);
+            ypalm = float.Parse(DataPacket[3]);  
             zpalm = float.Parse(DataPacket[4]); 
-            thumbCurlPOT = float.Parse(DataPacket[5]); 
-            thumbLateralPOT = float.Parse(DataPacket[6]) ;
-            indexbasePOT = float.Parse(DataPacket[7]);
-            indexknucklePOT = float.Parse(DataPacket[8]);
-            //midbasePOT = float.Parse(DataPacket[9]);
-            //midkmucklePOT = float.Parse(DataPacket[10]);
+            thumbcurl = float.Parse(DataPacket[5]);
+            thumblateral = float.Parse(DataPacket[6]);
+            index = float.Parse(DataPacket[7]);
+            mid = float.Parse(DataPacket[8]);
+           
 
             Debug.Log("Data Retrieved");
             // Continue to get more data
