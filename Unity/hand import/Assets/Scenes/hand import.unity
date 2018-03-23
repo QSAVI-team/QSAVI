@@ -1063,7 +1063,8 @@ MonoBehaviour:
   potMin: 0
   potMax: 676
   F: 0
-  Base0knuckle1: 0
+  portName: 
+  Datapacket: 0
 --- !u!1 &935172916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1475,8 @@ MonoBehaviour:
   potMin: 0
   potMax: 676
   F: 0
-  Base0knuckle1: 0
+  portName: 
+  Datapacket: 0
 --- !u!1 &1288757200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,7 +2171,8 @@ MonoBehaviour:
   potMin: 0
   potMax: 676
   F: 0
-  Base0knuckle1: 0
+  portName: 
+  Datapacket: 0
 --- !u!1 &1728714858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,7 +2200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec8de2bbb6fda041a010525c980e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setCOMPort: COM4
+  setCOMPort: COM3
   setCOMBaud: 115200
   setSerialPortRefreshPeriod: 0.01
   setSerialPortRequestDelayPeriod: 0.0005

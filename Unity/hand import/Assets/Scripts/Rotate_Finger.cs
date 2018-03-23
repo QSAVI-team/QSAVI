@@ -13,12 +13,13 @@ public class Rotate_Finger : MonoBehaviour{
     public float fingMin = 0f;
     public float fingMax = 0f;
     public int potMin = 0;
-    public int potMax = 0;
+    public int potMax = 676;
     public int F = 0;
-    public int Base0knuckle1 = 0;
-    float[,] POT = new float [2,2];  //[3,2]
-    float test = 0;
-
+    public string portName = "";
+    public int Datapacket = 0;
+    float POTBASE = 0;
+    float POTKNUCKLE=0;
+    
     // public int potval = 0;  // only to use for testing
 
 
@@ -29,7 +30,7 @@ public class Rotate_Finger : MonoBehaviour{
         StartCoroutine("ProcessFingerRotation");
     }
 
-    // ------------------------- GET ArduinoInterface.cs DATA -------------------------
+    // ------------------------- GET SERIAL PORT DATA -------------------------
     
     IEnumerator ProcessFingerRotation()
     {
@@ -38,35 +39,41 @@ public class Rotate_Finger : MonoBehaviour{
         // Assume data will be valid
         bool isValidData = true;
 
+     
+
         // If the data is valid, process it
-        if (isValidData) {
-            float TC = ArduinoInterface.thumbcurl;
-            float TL = ArduinoInterface.thumblateral;
-            float IB = ArduinoInterface.index;
-            float IK = ArduinoInterface.mid;
-            //float MB = ArduinoInterface.midbasePOT;
-            // float MK = ArduinoInterface.midknucklePOT;
-
-            float[,] POT = new float[2, 2] { { TC, TL }, { IB, IK } };//, { MB, MK } };
-          
-          
-            if (Base0knuckle1 == 0)
-            { potMax = 750;
+            if (isValidData)  {
+            float POTBASE = ArduinoInterface.thumbCurlPOT;
+            /*   some reason it doesnt like when you define POTBASE inside the if statement (debug log will read but wont send to transform 
+            if (F == 0)
+            {
+                float POTBASE = ArduinoInterface.thumbCurlPOT;
+                float POTKNUCKLE = ArduinoInterface.thumbLateralPOT;
+                Debug.Log(POTBASE);
             }
-            else
-            { potMax = 500;// not sure what this value should be 
+            else if (F == 1)
+            {
+                float POTBASE = ArduinoInterface.indexbasePOT;
+                float POTKNUCKLE = ArduinoInterface.indexknucklePOT;
             }
-
+            else if (F == 2)
+            {
+                float POTBASE = ArduinoInterface.midbasePOT;
+                float POTKNUCKLE = ArduinoInterface.midknucklePOT;
+            }
+               
+               */
+            
 
             //Debug.Log("Pot data aquired");
-              //test = TC; transform.localRotation = Quaternion.Euler(0,test*360/potMax , 0);
+          
 
-            transform.localRotation = Quaternion.Euler(0,POT[F,Base0knuckle1]*360/potMax , 0);
+            transform.localRotation = Quaternion.Euler(0,POTBASE*360/750 , 0);
 
 
             // float fingerRotation = ((test-potMin) / potMax)*(fingMax - fingMin) +fingMin; //relate potentiometer reading to rotation, potentiometer goes from 0 - 676
             //transform.eulerAngles = new Vector3(x, y,z);// new Vector3(0, fingerRotation, 0);
-
+            
         }
 
         StartCoroutine("ProcessFingerRotation");
