@@ -54,10 +54,10 @@ public class Rotate_Palm : MonoBehaviour {
 
 		yield return new WaitForSeconds (ArduinoInterface.SERIAL_PORT_REFRESH_PERIOD);
 
-        float w = ArduinoInterface.wpalm;
-        float x = ArduinoInterface.xpalm;
-        float y = ArduinoInterface.ypalm;
-        float z = ArduinoInterface.zpalm;
+        float w = ArduinoInterface.wpalm * (negativeW ? -1f : 1f);
+        float x = ArduinoInterface.xpalm * (negativeX ? -1f : 1f);
+        float y = ArduinoInterface.ypalm * (negativeY ? -1f : 1f);
+        float z = ArduinoInterface.zpalm * (negativeZ ? -1f : 1f);
         /*
 		float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f);
         float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
@@ -103,7 +103,7 @@ public class Rotate_Palm : MonoBehaviour {
 
 		if (setCenterRotationNow) {
 			setCenterRotationNow = false;
-			centerQuaternion = inputQuaternion;
+            centerQuaternion = inputQuaternion;
 			centerQuaternion = Quaternion.Inverse (centerQuaternion);
 		}
 
@@ -111,8 +111,8 @@ public class Rotate_Palm : MonoBehaviour {
 		//inputQuaternion = inputQuaternion * offsetQuaternion;
 
 		// Set the final orientaion
-		transform.localRotation = inputQuaternion * centerQuaternion;
-		transform.Rotate (offsetRotation, rotationSpace);
+		transform.localRotation = inputQuaternion * centerQuaternion* offsetQuaternion;
+       		//transform.Rotate (offsetRotation, rotationSpace);
 
 		/*
 		transform.RotateAround (transform.right, Mathf.Deg2Rad * additionalRotaion.x);

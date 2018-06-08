@@ -1866,6 +1866,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1527000052}
+  - component: {fileID: 1527000053}
   m_Layer: 0
   m_Name: hand_R
   m_TagString: Untagged
@@ -1890,6 +1891,29 @@ Transform:
   m_Father: {fileID: 448601749}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1527000053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1527000051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35670fd51acf028459827ed596941524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientaionMode: 0
+  negativeX: 0
+  negativeY: 0
+  negativeZ: 0
+  negativeW: 0
+  invertX: 0
+  invertY: 0
+  invertZ: 0
+  rotationSpace: 1
+  offsetRotation: {x: 0, y: 0, z: 0}
+  additionalRotaion: {x: 0, y: 0, z: 0}
+  setCenterRotationNow: 0
 --- !u!1 &1535076095
 GameObject:
   m_ObjectHideFlags: 0
