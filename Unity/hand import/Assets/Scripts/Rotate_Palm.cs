@@ -58,6 +58,8 @@ public class Rotate_Palm : MonoBehaviour {
         float x = ArduinoInterface.xpalm * (negativeX ? -1f : 1f);
         float y = ArduinoInterface.ypalm * (negativeY ? -1f : 1f);
         float z = ArduinoInterface.zpalm * (negativeZ ? -1f : 1f);
+
+  
         /*
 		float w = float.Parse (vec3 [0]) * (negativeW ? -1f : 1f);
         float x = float.Parse (vec3 [1]) * (negativeX ? -1f : 1f);
@@ -74,7 +76,7 @@ public class Rotate_Palm : MonoBehaviour {
                             {2*(x*y-w*y), 2*(y*z+w*x) ,2*(w*w +z*z)} };
 
         */////////////////////////////////////////
-        // Construct input quaternion from read data
+          // Construct input quaternion from read data
         Quaternion inputQuaternion = Quaternion.identity;
 
 		if(orientaionMode == OrientationMode.X_Y_Z) {
@@ -111,8 +113,8 @@ public class Rotate_Palm : MonoBehaviour {
 		//inputQuaternion = inputQuaternion * offsetQuaternion;
 
 		// Set the final orientaion
-		transform.localRotation = inputQuaternion * centerQuaternion* offsetQuaternion;
-       		//transform.Rotate (offsetRotation, rotationSpace);
+		transform.localRotation =  centerQuaternion* inputQuaternion ;
+       		transform.Rotate (offsetRotation, rotationSpace);
 
 		/*
 		transform.RotateAround (transform.right, Mathf.Deg2Rad * additionalRotaion.x);
