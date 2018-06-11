@@ -1188,6 +1188,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1099506107}
+  - component: {fileID: 1099506108}
   m_Layer: 0
   m_Name: upper_arm_R
   m_TagString: Untagged
@@ -1209,6 +1210,29 @@ Transform:
   m_Father: {fileID: 777122650}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1099506108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1099506106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35670fd51acf028459827ed596941524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientaionMode: 0
+  negativeX: 0
+  negativeY: 0
+  negativeZ: 0
+  negativeW: 0
+  invertX: 0
+  invertY: 0
+  invertZ: 0
+  rotationSpace: 1
+  offsetRotation: {x: 90, y: 0, z: 90}
+  additionalRotaion: {x: 0, y: 0, z: 0}
+  setCenterRotationNow: 0
 --- !u!1 &1118377861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,7 +1921,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1527000051}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35670fd51acf028459827ed596941524, type: 3}
   m_Name: 
@@ -2084,7 +2108,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1622880393}
   m_LocalRotation: {x: -0.34375033, y: 0.6185666, z: -0.34478283, w: -0.6167138}
-  m_LocalPosition: {x: 0.08067126, y: -1.7270255, z: -12.289854}
+  m_LocalPosition: {x: 1.99, y: 0.15, z: -12.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2221,7 +2245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec8de2bbb6fda041a010525c980e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setCOMPort: COM4
+  setCOMPort: COM3
   setCOMBaud: 115200
   setSerialPortRefreshPeriod: 0.01
   setSerialPortRequestDelayPeriod: 0.0005

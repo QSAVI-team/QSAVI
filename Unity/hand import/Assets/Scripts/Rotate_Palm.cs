@@ -110,19 +110,21 @@ public class Rotate_Palm : MonoBehaviour {
 		}
 
 		Quaternion offsetQuaternion = Quaternion.Euler (offsetRotation);
-		//inputQuaternion = inputQuaternion * offsetQuaternion;
+        //inputQuaternion = inputQuaternion * offsetQuaternion;
 
-		// Set the final orientaion
-		transform.localRotation =  centerQuaternion* inputQuaternion ;
-       		transform.Rotate (offsetRotation, rotationSpace);
+        // Set the final orientaion
+       
+        transform.localRotation =  offsetQuaternion*(centerQuaternion* inputQuaternion) ;
+      //  transform.Rotate(offsetRotation, rotationSpace);
 
-		/*
+
+        /*
 		transform.RotateAround (transform.right, Mathf.Deg2Rad * additionalRotaion.x);
 		transform.RotateAround (transform.up, Mathf.Deg2Rad * additionalRotaion.y);
 		transform.RotateAround (transform.forward, Mathf.Deg2Rad * additionalRotaion.z);
 		*/
 
-		Vector3 currentEulerAngles = transform.localEulerAngles;
+        Vector3 currentEulerAngles = transform.localEulerAngles;
 		//Vector3 currentEulerAngles = transform.InverseTransformDirection(inputQuaternion.eulerAngles);
 		if (invertX) {
 			currentEulerAngles.x = -currentEulerAngles.x;

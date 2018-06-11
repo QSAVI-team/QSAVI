@@ -84,8 +84,9 @@ public class ArduinoInterface : MonoBehaviour {
 			// Request data
 			Debug.Log ("Requesting data...");
 			serialPort.Write ("1");
+            Debug.Log("2");
 			yield return new WaitForSeconds (SERIAL_PORT_REQUEST_DELAY_PERIOD);
-            
+            Debug.Log("#");
             // Read the current data packet
             currentArduinoDataPacket = serialPort.ReadLine ();
             string[] DataPacket = currentArduinoDataPacket.Split(',');
