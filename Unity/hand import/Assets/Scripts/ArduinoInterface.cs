@@ -27,10 +27,15 @@ public class ArduinoInterface : MonoBehaviour {
     public static float xpalm = 0;
     public static float ypalm = 0;
     public static float zpalm = 0;
+    public static float welbow = 0;
+    public static float xelbow = 0;
+    public static float yelbow = 0;
+    public static float zelbow = 0;
     public static float index = 0;
     public static float thumbcurl = 0;
     public static float thumblateral = 0;
     public static float mid = 0;
+    public static int elbowType4 = 0;
  
     // ------------------------- SERIAL PORT -------------------------
 
@@ -71,7 +76,10 @@ public class ArduinoInterface : MonoBehaviour {
 			Debug.LogError ("Unable to open " + comPortName);
 		}
 
-	}
+      
+
+
+    }
 
 	// ------------------------- GET SERIAL PORT DATA -------------------------
 
@@ -84,9 +92,9 @@ public class ArduinoInterface : MonoBehaviour {
 			// Request data
 			Debug.Log ("Requesting data...");
 			serialPort.Write ("1");
-            Debug.Log("2");
+       
 			yield return new WaitForSeconds (SERIAL_PORT_REQUEST_DELAY_PERIOD);
-            Debug.Log("#");
+    
             // Read the current data packet
             currentArduinoDataPacket = serialPort.ReadLine ();
             string[] DataPacket = currentArduinoDataPacket.Split(',');
@@ -98,11 +106,15 @@ public class ArduinoInterface : MonoBehaviour {
             wpalm = float.Parse(DataPacket[1]);
             xpalm = float.Parse(DataPacket[2]);
             ypalm = float.Parse(DataPacket[3]);  
-            zpalm = float.Parse(DataPacket[4]); 
-            thumbcurl = float.Parse(DataPacket[5]);
-            thumblateral = float.Parse(DataPacket[6]);
-            index = float.Parse(DataPacket[7]);
-            mid = float.Parse(DataPacket[8]);
+            zpalm = float.Parse(DataPacket[4]);
+            welbow = float.Parse(DataPacket[1+elbowType4]);
+            xelbow = float.Parse(DataPacket[2+ elbowType4]);
+            yelbow = float.Parse(DataPacket[3+ elbowType4]);
+            zelbow = float.Parse(DataPacket[4+ elbowType4]);
+            thumbcurl = float.Parse(DataPacket[5+ elbowType4]);
+            thumblateral = float.Parse(DataPacket[6+ elbowType4]);
+            index = float.Parse(DataPacket[7+ elbowType4]);
+            mid = float.Parse(DataPacket[8+ elbowType4]);
            
 
             Debug.Log("Data Retrieved");
