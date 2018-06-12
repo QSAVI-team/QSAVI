@@ -306,16 +306,20 @@ void loop() {
   fifoCount2 = mpu2.getFIFOCount();
 
   // check for overflow (this should never happen unless our code is too inefficient)
-  if ((mpuIntStatus & 0x10) || fifoCount == 1024  ||fifoCount2 == 1024 || (mpu2IntStatus & 0x10)) {
+  if ((mpuIntStatus & 0x10) || fifoCount == 1024 )  {
     // reset so we can continue cleanly
     mpu.resetFIFO();
-    mpu2.resetFIFO();
     Serial.println(F("FIFO overflow!"));
-
+  }
+  else if ((mpu2IntStatus & 0x10) || fifoCount2 == 1024 ){
+    // reset so we can continue cleanly
+    mpu2.resetFIFO();
+    Serial.println(F("FIFO2 overflow!"));
+  }
     // otherwise, check for DMP data ready interrupt (this should happen frequently)
-  } else if ((mpuIntStatus & 0x02)|| (mpu2IntStatus & 0x02)){
+   else if((mpuIntStatus & 0x02)|| (mpu2IntStatus & 0x02)){
     // wait for correct available data length, should be a VERY short wait
-    while (fifoCount < packetSize || fifoCount2 < packetSize) 
+    while (fifoCount < packetSize && fifoCount2 < packetSize) 
     fifoCount = mpu.getFIFOCount();
     fifoCount2 = mpu2.getFIFOCount();
     // read a packet from FIFO
