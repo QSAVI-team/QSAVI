@@ -67,9 +67,9 @@ public class Rotate_Finger : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, 0.1f * transform.right, Color.red);
-        Debug.DrawRay(transform.position, 0.1f * transform.up, Color.green);
-        Debug.DrawRay(transform.position, 0.1f * transform.forward, Color.blue);
+      //  Debug.DrawRay(transform.position, 0.1f * transform.right, Color.red);
+       // Debug.DrawRay(transform.position, 0.1f * transform.up, Color.green);
+        //Debug.DrawRay(transform.position, 0.1f * transform.forward, Color.blue);
 
     }
 }

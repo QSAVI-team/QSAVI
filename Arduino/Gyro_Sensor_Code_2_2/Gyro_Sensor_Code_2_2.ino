@@ -58,7 +58,7 @@
 #ifdef DEBUG
   //#define DPRINT(args...)  Serial.print(args)             //OR use the following syntax:
   #define DPRINTSTIMER(t)    for (static unsigned long SpamTimer; (unsigned long)(millis() - SpamTimer) >= (t); SpamTimer = millis())
-  #define  DPRINTSFN(StrSize,Name,...) {char S[StrSize];//Serial.print("\t");Serial.print(Name);Serial.print(" "); Serial.print(dtostrf((float)__VA_ARGS__ ,S));}//StringSize,Name,Variable,Spaces,Percision
+  #define  DPRINTSFN(StrSize,Name,...) {char S[StrSize]};//Serial.print("\t");Serial.print(Name);Serial.print(" "); Serial.print(dtostrf((float)__VA_ARGS__ ,S));}//StringSize,Name,Variable,Spaces,Percision
   #define DPRINTLN(...)      //Serial.println(__VA_ARGS__)
 #else
   #define DPRINTSTIMER(t)    if(false)
@@ -351,8 +351,9 @@ void MPUMath() {
 #ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
 
     // Wait for request (any 1 byte)
- //  while (Serial.available() > 0) {      // doesnt like this while or the if  below
-      //if (Serial.read() > 0) {
+  while (Serial.available() > 0) {      // doesnt like this while or the if  below when viewing through the serial monitor
+      if (Serial.read() > 0) {
+        
         Serial.print(0); Serial.print(","); // used for calibration
  
      for (int i = 0; i < 2; i++) {
@@ -375,8 +376,8 @@ void MPUMath() {
      
 #ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
      
-   //} 
- // }
+   } 
+  }
 #endif
 
 #endif
@@ -520,16 +521,19 @@ void MPUMath() {
     teapotPacket[11]++; // packetCount, loops at 0xFF on purpose
 #endif
 
-    unsigned long currentMillis = millis();
+    unsigned long currentMillis =  millis();  //.....................................................
 
     // Blink "Hearbeat" LED to indicate activity
     if (currentMillis - lastHearbeadLedBlinkTime >= HEARBEAT_LED_BLINK_TIME) {
       lastHearbeadLedBlinkTime = currentMillis;
       blinkState = !blinkState;
       digitalWrite(LED_PIN, blinkState);
+      
     }
 
-  }
+}
+
+ 
 
 
 void setup() {
@@ -560,7 +564,7 @@ void setup() {
  * @return {void}
  */
 void loop() {
-  currentMillis = millis();   // Capture the latest value of millis()
+ unsigned long currentMillis = millis();   // Capture the latest value of millis()
 
   if (mpuInterrupt[0] && mpuInterrupt[1]) { // Wait for MPU interrupt or extra packet(s) available on both MPUs
     GetDMP();
