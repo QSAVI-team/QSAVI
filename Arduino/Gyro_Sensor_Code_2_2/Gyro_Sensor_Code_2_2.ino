@@ -54,6 +54,19 @@
 #include "Wire.h"
 #endif
 
+// DEBUG serial printing macros
+#ifdef DEBUG
+  //#define DPRINT(args...)  Serial.print(args)             //OR use the following syntax:
+  #define DPRINTSTIMER(t)    for (static unsigned long SpamTimer; (unsigned long)(millis() - SpamTimer) >= (t); SpamTimer = millis())
+  #define  DPRINTSFN(StrSize,Name,...) {char S[StrSize];//Serial.print("\t");Serial.print(Name);Serial.print(" "); Serial.print(dtostrf((float)__VA_ARGS__ ,S));}//StringSize,Name,Variable,Spaces,Percision
+  #define DPRINTLN(...)      //Serial.println(__VA_ARGS__)
+#else
+  #define DPRINTSTIMER(t)    if(false)
+  #define DPRINTSFN(...)     //blank line
+  #define DPRINTLN(...)      //blank line
+#endif
+
+
 // class default I2C address is 0x68
 // specific I2C addresses may be passed as a parameter here
 // AD0 low = 0x68 (default for SparkFun breakout and InvenSense evaluation board)
@@ -130,26 +143,10 @@ bool blinkState = false;
 bool dmpReady = false;  // set true if DMP init was successful
 //uint8_t mpuIntStatus[2];   // holds actual interrupt status byte from MPU
 uint8_t devStatus;      // return status after each device operation (0 = success, !0 = error)
-int FifoAlive[2] = {0, 0}; // tests if the interrupt is triggering
-uint16_t packetSize[2];    // expected DMP packet size (default is 42 bytes)
-uint16_t fifoCount[2];     // count of all bytes currently in FIFO
-uint8_t fifoBuffer[2][64]; // FIFO storage buffer
-
-
-// orientation/motion vars
-Quaternion q;           // [w, x, y, z]         quaternion container
-Quaternion q2;           // [w, x, y, z]         quaternion container
-VectorInt16 aa;         // [x, y, z]            accel sensor measurements
-VectorInt16 aaReal;     // [x, y, z]            gravity-free accel sensor measurements
-VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measurements
-VectorFloat gravity;    // [x, y, z]            gravity vector
-float euler[3];         // [psi, theta, phi]    Euler angle container
-float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
-
 
 // packet structure for InvenSense teapot demo
 uint8_t teapotPacket[14] = { '$', 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x00, '\r', '\n' };
-  
+  int pos = 0; 
 
 
 
@@ -167,12 +164,18 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x00, '\r'
 
 #define HEARBEAT_LED_BLINK_TIME 500 // ms
 unsigned long lastHearbeadLedBlinkTime = 0;
+unsigned long currentMillis = 0;    // stores the value of millis() in each iteration of loop()
+unsigned long prevMillis = 0;    // stores the value of millis() in each iteration of loop()
+
+
+
+
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
 // ================================================================
 
-void setup() {
+void i2cSetup() {
   // join I2C bus (I2Cdev library doesn't do this automatically)
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
   Wire.begin();
@@ -184,8 +187,8 @@ void setup() {
   // initialize serial communication
   // (115200 chosen because it is required for Teapot Demo output, but it's
   // really up to you depending on your project)
-  Serial.begin(115200);
-  while (!Serial); // wait for Leonardo enumeration, others continue immediately
+ // Serial.begin(115200);  //...............................................................
+ // while (!Serial); // wait for Leonardo enumeration, others continue immediately  //.......
 }
 
 
@@ -204,32 +207,67 @@ void dmpDataReady1() {
     mpuInterrupt[1] = true;
 }
 
+int FifoAlive[2] = {0, 0}; // tests if the interrupt is triggering
+uint16_t packetSize[2];    // expected DMP packet size (default is 42 bytes)
+uint16_t fifoCount[2];     // count of all bytes currently in FIFO
+uint8_t fifoBuffer[2][64]; // FIFO storage buffer
+
+
+// orientation/motion vars
+Quaternion q;           // [w, x, y, z]         quaternion container
+Quaternion q2;           // [w, x, y, z]         quaternion container
+VectorInt16 aa;         // [x, y, z]            accel sensor measurements
+VectorInt16 aaReal;     // [x, y, z]            gravity-free accel sensor measurements
+VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measurements
+VectorFloat gravity;    // [x, y, z]            gravity vector
+float euler[3];         // [psi, theta, phi]    Euler angle container
+float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
+
+
 
   // NOTE: 8MHz or slower host processors, like the Teensy @ 3.3v or Ardunio
   // Pro Mini running at 3.3v, cannot handle this baud rate reliably due to
   // the baud timing being too misaligned with processor ticks. You must use
   // 38400 or slower in these cases, or use some kind of external separate
   // crystal solution for the UART timer.
+
+
+
+  //=========================
+
+  //========================
 void MPU6050Connect() {
 
 for (int i = 0; i < 2; i++) {
-  // initialize device
-  //    Serial.println(F("Initializing I2C devices..."));
+
+      //Serial.print(F("Initializing MPU ")); Serial.println(i);
+    
+    static int MPUInitCntr = 0;  //Counter for looping and eventual initialization failure.
+
   mpus[i].initialize();
 
-  // verify connection
-  //    Serial.println(F("Testing device connections..."));
-  //    Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
-  /*
-      // wait for ready
-      Serial.println(F("\nSend any character to begin DMP programming and demo: "));
-      while (Serial.available() && Serial.read()); // empty buffer
-      while (!Serial.available());                 // wait for data
-      while (Serial.available() && Serial.read()); // empty buffer again
-  */
-  // load and configure the DMP
-  //    Serial.println(F("Initializing DMP..."));
   devStatus = mpus[i].dmpInitialize();
+
+    if (devStatus != 0) {
+      
+      // ERROR Checking!
+      // 1 = initial memory load failed
+      // 2 = DMP configuration updates failed
+      // (if it's going to break, usually the code will be 1)
+      
+      char *StatStr[5] { "No Error", "initial memory load failed", "DMP configuration updates failed", "3", "4"};
+
+      MPUInitCntr++;
+
+      //Serial.print(F("MPU")); Serial.print(i); Serial.print(F(" connection Try #")); Serial.println(MPUInitCntr);
+      //Serial.print(F("DMP Initialization failed (code ")); Serial.print(StatStr[devStatus]); Serial.println(F(")"));
+      
+      if (MPUInitCntr >= 10) return; //only try 10 times
+      delay(1000);
+      MPU6050Connect(); // Lets try again
+      return;
+    }
+
 
   // supply your own gyro offsets here, scaled for min sensitivity
   mpus[i].setXGyroOffset(220);
@@ -238,14 +276,15 @@ for (int i = 0; i < 2; i++) {
   mpus[i].setZAccelOffset(1788); // 1688 factory default for my test chip
 
 
-  // make sure it worked (returns 0 if so)
-  if (devStatus == 0){       // && devStatus2 == 0) {
-    // turn on the DMP, now that it's ready
-    //        Serial.println(F("Enabling DMP..."));
+
+    //Serial.print(F("Enabling DMP on MPU")); //Serial.println(i);
     mpus[i].setDMPEnabled(true);
+
     // enable Arduino interrupt detection
-    //        Serial.println(F("Enabling interrupt detection (Arduino external interrupt 0)..."));
-     
+    int intPin = i + 2;
+   // Serial.print(F("Enabling interrupt detection on MPU")); Serial.print(i); Serial.print(F("(Arduino external interrupt pin ")); Serial.print(intPin); Serial.println(F(" on the Uno)..."));
+    //Serial.print(F("mpu")); Serial.print(i); Serial.print(F(".getInterruptDrive=  ")); Serial.println(mpus[i].getInterruptDrive());  //Current interrupt drive mode (0=push-pull, 1=open-drain)
+    
     //Intentional duplication. Interrupt routine cannot pass args. 
     if (i == 0) {
       attachInterrupt(i, dmpDataReady0, RISING);
@@ -254,31 +293,20 @@ for (int i = 0; i < 2; i++) {
       attachInterrupt(i, dmpDataReady1, RISING);
     }
     
-    //mpuIntStatus = mpus[i].getIntStatus();
+    packetSize[i] = mpus[i].dmpGetFIFOPacketSize();  // get expected DMP packet size for later comparison
+    delay(1000); // Let it Stabalize
+    mpus[i].resetFIFO(); // Clear fifo buffer    
+    mpuInterrupt[i] = false; // wait for next interrupt
 
-    // set our DMP Ready flag so the main loop() function knows it's okay to use it
-    //        Serial.println(F("DMP ready! Waiting for first interrupt..."));
-    dmpReady = true;
 
-    // get expected DMP packet size for later comparison
-    packetSize[i] = mpus[i].dmpGetFIFOPacketSize();
-  } else {
-    // ERROR!
-    // 1 = initial memory load failed
-    // 2 = DMP configuration updates failed
-    // (if it's going to break, usually the code will be 1)
-    Serial.print(F("DMP Initialization failed (code "));
-    Serial.print(devStatus);
-    Serial.println(F(")"));
-  }
-
-  // configure LED for output
+  /* configure LED for output
   pinMode(LED_PIN, OUTPUT);
   // Configure button for input
   pinMode(BUTTON_PIN, INPUT);
   pinMode(POTBASE,INPUT);
-  
+  */
 }
+
 }
 
 
@@ -286,82 +314,66 @@ for (int i = 0; i < 2; i++) {
 // ===                    MAIN PROGRAM LOOP                     ===
 // ================================================================
 
-void loop() {
-  // if programming failed, don't try to do anything
-  if (!dmpReady) return;
+void GetDMP() { 
 
-  // wait for MPU interrupt or extra packet(s) available
-  //while (!mpuInterrupt && (fifoCount < packetSize) && (fifoCount2 < packetSize)) {  //.............................................................
-    // other program behavior stuff here
-    // .
-    // .
-    // .
-    // if you are really paranoid you can frequently test in between other
-    // stuff to see if mpuInterrupt is true, and if so, "break;" from the
-    // while() loop to immediately process the MPU data
-    // .
-    // .
-    // .
-
-
-for (int i = 0; i < 2; i++) { 
-    // Button Condition Variable
-    int buttonState = 0;
-  // reset interrupt flag and get INT_STATUS byte
-  mpuInterrupt[i] = false;
-  FifoAlive[i] = 1;
- // mpuIntStatus[i] = mpus[i].getIntStatus();
-
-
-  // get current FIFO count
-  fifoCount[i] = mpus[i].getFIFOCount();
-
-  // check for overflow (this should never happen unless our code is too inefficient)
-  if ((!fifoCount[i]) || (fifoCount[i] % packetSize[i])) { 
-     digitalWrite(LED_PIN, LOW); // lets turn off the blinking LED so we can see we are failing.
-    // reset so we can continue cleanly
-    mpus[i].resetFIFO();
-    Serial.println(F("FIFO overflow!"));
-  }
-    // otherwise, check for DMP data ready interrupt (this should happen frequently)
-   else {//if((mpuIntStatus & 0x02)|| (mpu2IntStatus & 0x02)){                   //.................................................................
-    // wait for correct available data length, should be a VERY short wait
-    while (fifoCount[i] >= packetSize[i]){// && fifoCount2 < packetSize2) 
-    //fifoCount[i] = mpus[i].getFIFOCount();
-    // read a packet from FIFO
-    mpus[i].getFIFOBytes(fifoBuffer[i], packetSize[i]);
-    // track FIFO count here in case there is > 1 packet available
-    // (this lets us immediately read more without waiting for an interrupt)
-    fifoCount[i] -= packetSize[i];
-    //Serial.println("Get new data!");
+  for (int i = 0; i < 2; i++) { 
+    mpuInterrupt[i] = false;
+    FifoAlive[i] = 1;
+    fifoCount[i] = mpus[i].getFIFOCount();
+    
+    if ((!fifoCount[i]) || (fifoCount[i] % packetSize[i])) { // we have failed Reset and wait till next time!
+      digitalWrite(LED_PIN, LOW); // lets turn off the blinking LED so we can see we are failing.
+        mpus[i].resetFIFO();// clear the buffer and start over
+    } 
+    else {
+      while (fifoCount[i]  >= packetSize[i]) { // Get the packets until we have the latest!
+          mpus[i].getFIFOBytes(fifoBuffer[i], packetSize[i]); // lets do the magic and get the data
+          fifoCount[i] -= packetSize[i];
+      }
     }
-   }
+  } 
+
+
+  MPUMath(); // Successful!  Do the math and show angles from both MPUs
+  digitalWrite(LED_PIN, !digitalRead(LED_PIN)); // Blink the LED on each cycle
+  
+}
+
+
+//====================================================//
+//----------------- QUATERNION OUTPUTS---------------
+//===================================================//
+void MPUMath() {
+
+
 #ifdef OUTPUT_QSAVI_GLOVE
 
-#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+//#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+
     // Wait for request (any 1 byte)
-    while (Serial.available() > 0) {
-      if (Serial.read() > 0) {
-        Serial.print(digitalRead(3)); Serial.print(","); // used for calibration
+ //  while (Serial.available() > 0) {      // doesnt like this while or the if  below
+      //if (Serial.read() > 0) {
+        Serial.print(0); Serial.print(","); // used for calibration
  
-       for (int i = 0; i < 2; i++) {
+     for (int i = 0; i < 2; i++) {
         mpus[i].dmpGetQuaternion(&q, fifoBuffer[i]);
        // Serial.println("Waiting for request");
 
-        Serial.print(q[i].w); Serial.print(",");
-        Serial.print(q[i].x); Serial.print(",");
-        Serial.print(q[i].y); Serial.print(",");
-        Serial.print(q[i].z); Serial.print(",");
+        Serial.print(q.w); Serial.print(",");
+        Serial.print(q.x); Serial.print(",");
+        Serial.print(q.y); Serial.print(",");
+        Serial.print(q.z); Serial.print(",");
        }
         Serial.print(0);Serial.print(",");
         Serial.print(0);Serial.print(",");
         Serial.print(0);Serial.print(",");
-        Serial.print(0);
-#endif
-       
+        Serial.println(0);
+//#endif
+     
 #ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
-      }
-    }
+     
+   //} 
+ // }
 #endif
 
 #endif
@@ -515,4 +527,54 @@ for (int i = 0; i < 2; i++) {
     }
 
   }
+
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial);  // Wait for the connection to be established?
+
+  // Run MPU initializations
+  //Serial.println(F("i2cSetup"));
+  i2cSetup();
+  //Serial.println(F("MPU6050 Connection Routine"));
+  MPU6050Connect();
+  //Serial.println(F("Setup complete"));
+
+  pinMode(LED_PIN, OUTPUT);
+
+  loop();
 }
+
+
+/**
+ * =============================================================
+ * ===                  Arduino Loop                         ===
+ * =============================================================
+ *
+ * @author Mike Muscato
+ * @date   2017-01-30
+ *
+ * @return {void}
+ */
+void loop() {
+  currentMillis = millis();   // Capture the latest value of millis()
+
+  if (mpuInterrupt[0] && mpuInterrupt[1]) { // Wait for MPU interrupt or extra packet(s) available on both MPUs
+    GetDMP();
+  }
+
+  // Uncomment for setting and adjusting the hardware start position. 
+  // (e.g. Setting rotation and leveling the pan/tilt servo arms at initial 90-degree position)
+  // IMPORTANT: Comment out the moveServos() method call in MPUMath() when using this. 
+  // TODO: Remove in final program once hardware and software calibration is completed.
+  // 
+  // yawServo.write(90);
+  // pitchServo.write(90);
+
+}
+
+
+
+
+
+
