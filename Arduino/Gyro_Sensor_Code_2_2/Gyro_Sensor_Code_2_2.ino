@@ -156,7 +156,7 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x00, '\r'
 
 // Will be un-used
 #define SEND_DELAY 100 // ms
-//#define WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+#define WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
 
 // ================================================================
 // ===                          TIMING                          ===
@@ -348,7 +348,7 @@ void MPUMath() {
 
 #ifdef OUTPUT_QSAVI_GLOVE
 
-//#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
+#ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
 
     // Wait for request (any 1 byte)
  //  while (Serial.available() > 0) {      // doesnt like this while or the if  below
@@ -364,11 +364,14 @@ void MPUMath() {
         Serial.print(q.y); Serial.print(",");
         Serial.print(q.z); Serial.print(",");
        }
-        Serial.print(0);Serial.print(",");
-        Serial.print(0);Serial.print(",");
-        Serial.print(0);Serial.print(",");
-        Serial.println(0);
-//#endif
+        Serial.print(analogRead(0));Serial.print(","); Serial.print(analogRead(1));Serial.print(","); // thumb
+         Serial.print(analogRead(2));Serial.print(","); Serial.print(analogRead(3));Serial.print(","); // index
+         Serial.print(analogRead(4));Serial.print(","); Serial.print(analogRead(5));Serial.print(","); // middle
+          Serial.print(analogRead(6));Serial.print(","); Serial.println(analogRead(7)); // pinky
+          // string length should be 17 now
+
+     
+#endif
      
 #ifdef WAIT_FOR_REQUEST_BEFORE_SENDING_DATA
      

@@ -31,6 +31,7 @@ public class Rotate_Palm : MonoBehaviour {
 	public Vector3 additionalRotaion = new Vector3(0f, 0f, 0f);
 	Quaternion centerQuaternion = Quaternion.identity;
 	public bool setCenterRotationNow = false;
+    public int palm_0_elbow_1 = 0;
 
 
     float[] caliRotation = { 0, 0, 0 };
@@ -54,10 +55,10 @@ public class Rotate_Palm : MonoBehaviour {
 
 		yield return new WaitForSeconds (ArduinoInterface.SERIAL_PORT_REFRESH_PERIOD);
 
-        float w = ArduinoInterface.wpalm * (negativeW ? -1f : 1f);
-        float x = ArduinoInterface.xpalm * (negativeX ? -1f : 1f);
-        float y = ArduinoInterface.ypalm * (negativeY ? -1f : 1f);
-        float z = ArduinoInterface.zpalm * (negativeZ ? -1f : 1f);
+        float w = ArduinoInterface.w[palm_0_elbow_1] * (negativeW ? -1f : 1f);
+        float x = ArduinoInterface.x[palm_0_elbow_1] * (negativeX ? -1f : 1f);
+        float y = ArduinoInterface.y[palm_0_elbow_1] * (negativeY ? -1f : 1f);
+        float z = ArduinoInterface.z[palm_0_elbow_1] * (negativeZ ? -1f : 1f);
        
        /////////////////////////////////////////
           // Construct input quaternion from read data

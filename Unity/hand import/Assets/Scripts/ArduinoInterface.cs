@@ -5,37 +5,32 @@ using System.IO.Ports;
 
 public class ArduinoInterface : MonoBehaviour {
 
-	// ------------------------- CONSTANT SERIAL PORT DATA -------------------------
+    // ------------------------- CONSTANT SERIAL PORT DATA -------------------------
 
-	[Header("COM Port")]
-	public string setCOMPort = "COM3";
-	public int setCOMBaud = 115200;
+    [Header("COM Port")]
+    public string setCOMPort = "COM3";
+    public int setCOMBaud = 115200;
 
     public static string COM_PORT;
-	public static int COM_BAUD;
+    public static int COM_BAUD;
 
-	// ------------------------- CONSTANT TIMING DATA -------------------------
+    // ------------------------- CONSTANT TIMING DATA -------------------------
 
-	[Header("Timing")]
-	public float setSerialPortRefreshPeriod = 0.01f; // Seconds
-	public float setSerialPortRequestDelayPeriod = 0.0005f; // Seconds
+    [Header("Timing")]
+    public float setSerialPortRefreshPeriod = 0.01f; // Seconds
+    public float setSerialPortRequestDelayPeriod = 0.0005f; // Seconds
 
-	public static float SERIAL_PORT_REFRESH_PERIOD;
-	public static float SERIAL_PORT_REQUEST_DELAY_PERIOD;
-    public static float calibration = 0;
-    public static float wpalm = 0;
-    public static float xpalm = 0;
-    public static float ypalm = 0;
-    public static float zpalm = 0;
-    public static float welbow = 0;
-    public static float xelbow = 0;
-    public static float yelbow = 0;
-    public static float zelbow = 0;
-    public static float index = 0;
-    public static float thumbcurl = 0;
-    public static float thumblateral = 0;
-    public static float mid = 0;
-    public static int elbowType4 = 0;
+    public static float SERIAL_PORT_REFRESH_PERIOD;
+    public static float SERIAL_PORT_REQUEST_DELAY_PERIOD;
+    public static float button = 0;
+
+    public static Vector2 w = new Vector2 (0, 0) ;
+    public static Vector2 x = new Vector2 (0, 0);
+    public static Vector2 y = new Vector2(0, 0);
+    public static Vector2 z = new Vector2(0, 0);
+    public static float[,] fingers = new float[4, 2]; 
+
+    public static int palm0_elbow4 = 0;
  
     // ------------------------- SERIAL PORT -------------------------
 
@@ -102,20 +97,15 @@ public class ArduinoInterface : MonoBehaviour {
             Debug.Log ("Data: " + currentArduinoDataPacket);
             Debug.Log("Requesting data");
             // Separate DataPAcket into variables
-            calibration = float.Parse(DataPacket[0]);
-            wpalm = float.Parse(DataPacket[1]);
-            xpalm = float.Parse(DataPacket[2]);
-            ypalm = float.Parse(DataPacket[3]);  
-            zpalm = float.Parse(DataPacket[4]);
-            welbow = float.Parse(DataPacket[1+elbowType4]);
-            xelbow = float.Parse(DataPacket[2+ elbowType4]);
-            yelbow = float.Parse(DataPacket[3+ elbowType4]);
-            zelbow = float.Parse(DataPacket[4+ elbowType4]);
-            thumbcurl = float.Parse(DataPacket[5+ elbowType4]);
-            thumblateral = float.Parse(DataPacket[6+ elbowType4]);
-            index = float.Parse(DataPacket[7+ elbowType4]);
-            mid = float.Parse(DataPacket[8+ elbowType4]);
-           
+            button = float.Parse(DataPacket[0]);
+            w = new Vector2 (float.Parse(DataPacket[1]), float.Parse(DataPacket[5]));
+            x = new Vector2 (float.Parse(DataPacket[2]), float.Parse(DataPacket[6]));
+            y = new Vector2 (float.Parse(DataPacket[3]), float.Parse(DataPacket[7]));  
+            z = new Vector2 (float.Parse(DataPacket[4]), float.Parse(DataPacket[8]));
+            float [,] fingers = new float [4, 2] {{float.Parse(DataPacket[9])  , float.Parse(DataPacket[10])},  // thumb
+                                                { float.Parse(DataPacket[11]) , float.Parse(DataPacket[12]) },// index
+                                                { float.Parse(DataPacket[13]) , float.Parse(DataPacket[14]) },  // middle
+                                                { float.Parse(DataPacket[15]) , float.Parse(DataPacket[16]) }};  // pinky
 
             Debug.Log("Data Retrieved");
             // Continue to get more data
