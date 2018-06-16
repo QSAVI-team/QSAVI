@@ -260,7 +260,7 @@ for (int i = 0; i < 2; i++) {
       MPUInitCntr++;
 
       //Serial.print(F("MPU")); Serial.print(i); Serial.print(F(" connection Try #")); Serial.println(MPUInitCntr);
-      //Serial.print(F("DMP Initialization failed (code ")); Serial.print(StatStr[devStatus]); Serial.println(F(")"));
+      //Serial.print("3");//Serial.print(F("DMP Initialization failed (code ")); Serial.print(StatStr[devStatus]); Serial.println(F(")"));
       
       if (MPUInitCntr >= 10) return; //only try 10 times
       delay(1000);
@@ -323,6 +323,7 @@ void GetDMP() {
     
     if ((!fifoCount[i]) || (fifoCount[i] % packetSize[i])) { // we have failed Reset and wait till next time!
       digitalWrite(LED_PIN, LOW); // lets turn off the blinking LED so we can see we are failing.
+      //Serial.print("1");
         mpus[i].resetFIFO();// clear the buffer and start over
     } 
     else {
@@ -365,10 +366,10 @@ void MPUMath() {
         Serial.print(q.y); Serial.print(",");
         Serial.print(q.z); Serial.print(",");
        }
-        Serial.print(analogRead(0));Serial.print(","); Serial.print(analogRead(1));Serial.print(","); // thumb
-         Serial.print(analogRead(2));Serial.print(","); Serial.print(analogRead(3));Serial.print(","); // index
-         Serial.print(analogRead(4));Serial.print(","); Serial.print(analogRead(5));Serial.print(","); // middle
-          Serial.print(analogRead(6));Serial.print(","); Serial.println(analogRead(7)); // pinky
+        Serial.print(analogRead(8));Serial.print(","); Serial.print(analogRead(9));Serial.print(","); // thumb
+         Serial.print(analogRead(10));Serial.print(","); Serial.print(analogRead(11));Serial.print(","); // index
+         Serial.print(analogRead(12));Serial.print(","); Serial.print(analogRead(13));Serial.print(","); // middle
+          Serial.print(analogRead(14));Serial.print(","); Serial.println(analogRead(15)); // pinky
           // string length should be 17 now
 
      

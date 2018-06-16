@@ -337,13 +337,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 0
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 1
+  i: 0
+  m: 0
+  p: 0
 --- !u!1 &351227167
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 448601748}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35670fd51acf028459827ed596941524, type: 3}
   m_Name: 
@@ -513,7 +513,7 @@ MonoBehaviour:
   offsetRotation: {x: 90, y: 0, z: 90}
   additionalRotaion: {x: 0, y: 0, z: 0}
   setCenterRotationNow: 0
-  palm_0_elbow_1: 1
+  palm_0_elbow_1: 0
 --- !u!1 &466839991
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,13 +555,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 3
-  knuckle: 0
+  factor: 10
+  offset: 0
   Base0knuckle1: 0
+  t: 0
+  i: 0
+  m: 0
+  p: 1
 --- !u!1 &495238249
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,13 +726,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 2
-  knuckle: 0
+  factor: 10
+  offset: 0
   Base0knuckle1: 0
+  t: 0
+  i: 0
+  m: 1
+  p: 0
 --- !u!1 &576124604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,13 +1140,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 676
-  finger: 1
-  knuckle: 0
+  factor: 10
+  offset: 0
   Base0knuckle1: 0
+  t: 0
+  i: 1
+  m: 0
+  p: 0
 --- !u!1 &935172916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   invertY: 0
   invertZ: 0
   rotationSpace: 1
-  offsetRotation: {x: 90, y: 0, z: 90}
+  offsetRotation: {x: 0, y: 0, z: 0}
   additionalRotaion: {x: 0, y: 0, z: 0}
   setCenterRotationNow: 0
   palm_0_elbow_1: 0
@@ -1520,13 +1520,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 2
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 1
+  p: 0
 --- !u!1 &1242014621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,13 +1567,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 2
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 1
+  p: 0
 --- !u!1 &1279629176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,13 +1615,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 676
-  finger: 1
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 0
+  p: 0
 --- !u!1 &1288757200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,13 +1741,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 0
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 1
+  i: 0
+  m: 0
+  p: 0
 --- !u!1 &1361439851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,13 +1980,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 3
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 0
+  p: 1
 --- !u!1 &1450922098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,13 +2028,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 3
-  knuckle: 0
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 0
+  p: 1
 --- !u!1 &1515246338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1527000051}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35670fd51acf028459827ed596941524, type: 3}
   m_Name: 
@@ -2190,13 +2190,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 3
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 0
+  p: 1
 --- !u!1 &1577717687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,7 +2309,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1622880393}
   m_LocalRotation: {x: -0.33820757, y: 0.6283255, z: -0.35022438, w: -0.6067666}
-  m_LocalPosition: {x: 0.98, y: -0.52, z: -12.31}
+  m_LocalPosition: {x: -0.04, y: -1.6, z: -12.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2413,13 +2413,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 676
-  finger: 1
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 0
+  p: 0
 --- !u!1 &1728714858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,7 +2447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec8de2bbb6fda041a010525c980e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setCOMPort: COM3
+  setCOMPort: COM5
   setCOMBaud: 115200
   setSerialPortRefreshPeriod: 0.01
   setSerialPortRequestDelayPeriod: 0.0005
@@ -2505,13 +2505,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 0
-  knuckle: 0
+  factor: 10
+  offset: 0
   Base0knuckle1: 0
+  t: 1
+  i: 0
+  m: 0
+  p: 0
 --- !u!1 &1802896170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,13 +2817,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 3
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 0
+  p: 1
 --- !u!1 &2094854835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,13 +2865,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bf9549da9688438dcb523b0d5dce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingMin: 0
-  fingMax: 0
-  potMin: 0
-  potMax: 0
-  finger: 3
-  knuckle: 1
-  Base0knuckle1: 0
+  factor: 10
+  offset: 0
+  Base0knuckle1: 1
+  t: 0
+  i: 0
+  m: 0
+  p: 1
 --- !u!1 &2097864938
 GameObject:
   m_ObjectHideFlags: 0
